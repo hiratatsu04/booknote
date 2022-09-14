@@ -7,27 +7,6 @@ Public Class BookDetail
 
     End Sub
 
-    Private Sub BookDetail_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        ' ComboBoxの初期化
-        For i As Integer = 1980 To 2022
-            BuyYearComboBox.Items.Add(i)
-            StartYearComboBox.Items.Add(i)
-            EndYearComboBox.Items.Add(i)
-        Next
-        For i As Integer = 1 To 12
-            BuyMonthComboBox.Items.Add(i)
-            StartMonthComboBox.Items.Add(i)
-            EndMonthComboBox.Items.Add(i)
-        Next
-        For i As Integer = 1 To 31
-            BuyDayComboBox.Items.Add(i)
-            StartDayComboBox.Items.Add(i)
-            EndDayComboBox.Items.Add(i)
-        Next
-
-    End Sub
-
     Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
 
     End Sub
@@ -49,6 +28,26 @@ Public Class BookDetail
 
             BookImagePictureBox.SizeMode = PictureBoxSizeMode.StretchImage
             BookImagePictureBox.Image = bookImage
+        End If
+
+    End Sub
+
+    Private Sub BuyDateTextBox_Leave(sender As Object, e As EventArgs) Handles BuyDateTextBox.Leave
+
+        Dim buyDate As Date
+
+        'Dim buyDateString As String = BuyDateTextBox.Text.Insert(6, "/"c).Insert(4, "/"c)
+        'If Not DateTime.TryParse(buyDateString, buyDate) Then
+        '    MessageBox.Show($"{BuyDateTextBox.Text}の値をDate型に変換できません。")
+        '    BuyDateTextBox.Text = String.Empty
+        '    BuyDateTextBox.Focus()
+        'End If
+
+        If Not DateTime.TryParseExact(BuyDateTextBox.Text, "yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo, System.Globalization.DateTimeStyles.None, buyDate) Then
+
+            MessageBox.Show($"{BuyDateTextBox.Text}の値をDate型に変換できません。")
+            BuyDateTextBox.Text = String.Empty
+
         End If
 
     End Sub
