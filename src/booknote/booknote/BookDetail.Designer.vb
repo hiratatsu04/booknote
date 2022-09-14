@@ -57,6 +57,7 @@ Partial Class BookDetail
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
+        Me.RegisterImageButton = New System.Windows.Forms.Button()
         CType(Me.BookImagePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ReviewTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -387,11 +388,24 @@ Partial Class BookDetail
         Me.Label17.TabIndex = 31
         Me.Label17.Text = "年"
         '
+        'RegisterImageButton
+        '
+        Me.RegisterImageButton.Font = New System.Drawing.Font("游ゴシック", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.RegisterImageButton.Location = New System.Drawing.Point(11, 314)
+        Me.RegisterImageButton.Margin = New System.Windows.Forms.Padding(4)
+        Me.RegisterImageButton.Name = "RegisterImageButton"
+        Me.RegisterImageButton.Size = New System.Drawing.Size(108, 29)
+        Me.RegisterImageButton.TabIndex = 36
+        Me.RegisterImageButton.TabStop = False
+        Me.RegisterImageButton.Text = "画像の登録"
+        Me.RegisterImageButton.UseVisualStyleBackColor = True
+        '
         'BookDetail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 27.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(796, 841)
+        Me.Controls.Add(Me.RegisterImageButton)
         Me.Controls.Add(Me.EndDayComboBox)
         Me.Controls.Add(Me.EndMonthComboBox)
         Me.Controls.Add(Me.EndYearComboBox)
@@ -473,4 +487,5 @@ Partial Class BookDetail
     Friend WithEvents Label15 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents Label17 As Label
+    Friend WithEvents RegisterImageButton As Button
 End Class

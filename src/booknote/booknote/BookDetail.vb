@@ -31,4 +31,17 @@ Public Class BookDetail
     Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
 
     End Sub
+
+    Private Sub RegisterImageButton_Click(sender As Object, e As EventArgs) Handles RegisterImageButton.Click
+
+        'OpenFileDialogクラスのインスタンスを作成
+        Dim ofd As New OpenFileDialog()
+
+        'ダイアログを表示する
+        If ofd.ShowDialog() = DialogResult.OK Then
+            Dim bookImage As System.Drawing.Image = System.Drawing.Image.FromFile(ofd.FileName)
+            BookImagePictureBox.Image = bookImage
+        End If
+
+    End Sub
 End Class
