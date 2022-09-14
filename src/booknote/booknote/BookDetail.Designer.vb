@@ -39,9 +39,24 @@ Partial Class BookDetail
         Me.GenreTextBox = New System.Windows.Forms.TextBox()
         Me.ReviewTrackBar = New System.Windows.Forms.TrackBar()
         Me.ReviewLabel = New System.Windows.Forms.Label()
-        Me.BuyDateTimePicker = New System.Windows.Forms.DateTimePicker()
-        Me.StartDateTimePicker = New System.Windows.Forms.DateTimePicker()
-        Me.EndDateTimePicker = New System.Windows.Forms.DateTimePicker()
+        Me.BuyYearComboBox = New System.Windows.Forms.ComboBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.BuyMonthComboBox = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.BuyDayComboBox = New System.Windows.Forms.ComboBox()
+        Me.StartDayComboBox = New System.Windows.Forms.ComboBox()
+        Me.StartMonthComboBox = New System.Windows.Forms.ComboBox()
+        Me.StartYearComboBox = New System.Windows.Forms.ComboBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.EndDayComboBox = New System.Windows.Forms.ComboBox()
+        Me.EndMonthComboBox = New System.Windows.Forms.ComboBox()
+        Me.EndYearComboBox = New System.Windows.Forms.ComboBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
         CType(Me.BookImagePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ReviewTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -49,7 +64,7 @@ Partial Class BookDetail
         'ReturnButton
         '
         Me.ReturnButton.Location = New System.Drawing.Point(11, 10)
-        Me.ReturnButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ReturnButton.Margin = New System.Windows.Forms.Padding(4)
         Me.ReturnButton.Name = "ReturnButton"
         Me.ReturnButton.Size = New System.Drawing.Size(67, 39)
         Me.ReturnButton.TabIndex = 10
@@ -60,7 +75,7 @@ Partial Class BookDetail
         'EditButton
         '
         Me.EditButton.Location = New System.Drawing.Point(713, 10)
-        Me.EditButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.EditButton.Margin = New System.Windows.Forms.Padding(4)
         Me.EditButton.Name = "EditButton"
         Me.EditButton.Size = New System.Drawing.Size(70, 39)
         Me.EditButton.TabIndex = 10
@@ -71,7 +86,7 @@ Partial Class BookDetail
         'BookImagePictureBox
         '
         Me.BookImagePictureBox.Location = New System.Drawing.Point(11, 68)
-        Me.BookImagePictureBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.BookImagePictureBox.Margin = New System.Windows.Forms.Padding(4)
         Me.BookImagePictureBox.Name = "BookImagePictureBox"
         Me.BookImagePictureBox.Size = New System.Drawing.Size(202, 238)
         Me.BookImagePictureBox.TabIndex = 2
@@ -140,17 +155,17 @@ Partial Class BookDetail
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(263, 427)
+        Me.Label7.Location = New System.Drawing.Point(200, 427)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(75, 27)
+        Me.Label7.Size = New System.Drawing.Size(138, 27)
         Me.Label7.TabIndex = 9
-        Me.Label7.Text = "読了："
+        Me.Label7.Text = "読書終了日："
         '
         'MemoRichTextBox
         '
         Me.MemoRichTextBox.Location = New System.Drawing.Point(11, 493)
-        Me.MemoRichTextBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MemoRichTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.MemoRichTextBox.Name = "MemoRichTextBox"
         Me.MemoRichTextBox.Size = New System.Drawing.Size(772, 335)
         Me.MemoRichTextBox.TabIndex = 7
@@ -169,7 +184,7 @@ Partial Class BookDetail
         'TitleTextBox
         '
         Me.TitleTextBox.Location = New System.Drawing.Point(330, 68)
-        Me.TitleTextBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TitleTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.TitleTextBox.Name = "TitleTextBox"
         Me.TitleTextBox.Size = New System.Drawing.Size(453, 41)
         Me.TitleTextBox.TabIndex = 0
@@ -177,7 +192,7 @@ Partial Class BookDetail
         'AuthorTextBox
         '
         Me.AuthorTextBox.Location = New System.Drawing.Point(330, 133)
-        Me.AuthorTextBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.AuthorTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.AuthorTextBox.Name = "AuthorTextBox"
         Me.AuthorTextBox.Size = New System.Drawing.Size(453, 41)
         Me.AuthorTextBox.TabIndex = 1
@@ -185,7 +200,7 @@ Partial Class BookDetail
         'GenreTextBox
         '
         Me.GenreTextBox.Location = New System.Drawing.Point(330, 194)
-        Me.GenreTextBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GenreTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.GenreTextBox.Name = "GenreTextBox"
         Me.GenreTextBox.Size = New System.Drawing.Size(453, 41)
         Me.GenreTextBox.TabIndex = 2
@@ -193,10 +208,10 @@ Partial Class BookDetail
         'ReviewTrackBar
         '
         Me.ReviewTrackBar.Location = New System.Drawing.Point(399, 252)
-        Me.ReviewTrackBar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ReviewTrackBar.Margin = New System.Windows.Forms.Padding(4)
         Me.ReviewTrackBar.Maximum = 50
         Me.ReviewTrackBar.Name = "ReviewTrackBar"
-        Me.ReviewTrackBar.Size = New System.Drawing.Size(230, 30)
+        Me.ReviewTrackBar.Size = New System.Drawing.Size(230, 45)
         Me.ReviewTrackBar.TabIndex = 3
         Me.ReviewTrackBar.TickFrequency = 10
         '
@@ -210,38 +225,191 @@ Partial Class BookDetail
         Me.ReviewLabel.TabIndex = 16
         Me.ReviewLabel.Text = "0.0"
         '
-        'BuyDateTimePicker
+        'BuyYearComboBox
         '
-        Me.BuyDateTimePicker.Location = New System.Drawing.Point(330, 320)
-        Me.BuyDateTimePicker.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.BuyDateTimePicker.Name = "BuyDateTimePicker"
-        Me.BuyDateTimePicker.Size = New System.Drawing.Size(211, 41)
-        Me.BuyDateTimePicker.TabIndex = 4
+        Me.BuyYearComboBox.FormattingEnabled = True
+        Me.BuyYearComboBox.Location = New System.Drawing.Point(330, 326)
+        Me.BuyYearComboBox.Name = "BuyYearComboBox"
+        Me.BuyYearComboBox.Size = New System.Drawing.Size(87, 35)
+        Me.BuyYearComboBox.TabIndex = 18
         '
-        'StartDateTimePicker
+        'Label9
         '
-        Me.StartDateTimePicker.Location = New System.Drawing.Point(330, 369)
-        Me.StartDateTimePicker.Margin = New System.Windows.Forms.Padding(4)
-        Me.StartDateTimePicker.Name = "StartDateTimePicker"
-        Me.StartDateTimePicker.Size = New System.Drawing.Size(211, 41)
-        Me.StartDateTimePicker.TabIndex = 5
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(414, 329)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(33, 27)
+        Me.Label9.TabIndex = 19
+        Me.Label9.Text = "年"
         '
-        'EndDateTimePicker
+        'BuyMonthComboBox
         '
-        Me.EndDateTimePicker.Location = New System.Drawing.Point(330, 418)
-        Me.EndDateTimePicker.Margin = New System.Windows.Forms.Padding(4)
-        Me.EndDateTimePicker.Name = "EndDateTimePicker"
-        Me.EndDateTimePicker.Size = New System.Drawing.Size(211, 41)
-        Me.EndDateTimePicker.TabIndex = 6
+        Me.BuyMonthComboBox.FormattingEnabled = True
+        Me.BuyMonthComboBox.Location = New System.Drawing.Point(454, 326)
+        Me.BuyMonthComboBox.Name = "BuyMonthComboBox"
+        Me.BuyMonthComboBox.Size = New System.Drawing.Size(47, 35)
+        Me.BuyMonthComboBox.TabIndex = 20
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(499, 329)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(33, 27)
+        Me.Label10.TabIndex = 21
+        Me.Label10.Text = "月"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(584, 329)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(33, 27)
+        Me.Label11.TabIndex = 23
+        Me.Label11.Text = "日"
+        '
+        'BuyDayComboBox
+        '
+        Me.BuyDayComboBox.FormattingEnabled = True
+        Me.BuyDayComboBox.Location = New System.Drawing.Point(539, 326)
+        Me.BuyDayComboBox.Name = "BuyDayComboBox"
+        Me.BuyDayComboBox.Size = New System.Drawing.Size(47, 35)
+        Me.BuyDayComboBox.TabIndex = 22
+        '
+        'StartDayComboBox
+        '
+        Me.StartDayComboBox.FormattingEnabled = True
+        Me.StartDayComboBox.Location = New System.Drawing.Point(539, 375)
+        Me.StartDayComboBox.Name = "StartDayComboBox"
+        Me.StartDayComboBox.Size = New System.Drawing.Size(47, 35)
+        Me.StartDayComboBox.TabIndex = 28
+        '
+        'StartMonthComboBox
+        '
+        Me.StartMonthComboBox.FormattingEnabled = True
+        Me.StartMonthComboBox.Location = New System.Drawing.Point(454, 375)
+        Me.StartMonthComboBox.Name = "StartMonthComboBox"
+        Me.StartMonthComboBox.Size = New System.Drawing.Size(47, 35)
+        Me.StartMonthComboBox.TabIndex = 26
+        '
+        'StartYearComboBox
+        '
+        Me.StartYearComboBox.FormattingEnabled = True
+        Me.StartYearComboBox.Location = New System.Drawing.Point(330, 375)
+        Me.StartYearComboBox.Name = "StartYearComboBox"
+        Me.StartYearComboBox.Size = New System.Drawing.Size(87, 35)
+        Me.StartYearComboBox.TabIndex = 24
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(584, 378)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(33, 27)
+        Me.Label12.TabIndex = 29
+        Me.Label12.Text = "日"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(499, 378)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(33, 27)
+        Me.Label13.TabIndex = 27
+        Me.Label13.Text = "月"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(414, 378)
+        Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(33, 27)
+        Me.Label14.TabIndex = 25
+        Me.Label14.Text = "年"
+        '
+        'EndDayComboBox
+        '
+        Me.EndDayComboBox.FormattingEnabled = True
+        Me.EndDayComboBox.Location = New System.Drawing.Point(539, 424)
+        Me.EndDayComboBox.Name = "EndDayComboBox"
+        Me.EndDayComboBox.Size = New System.Drawing.Size(47, 35)
+        Me.EndDayComboBox.TabIndex = 34
+        '
+        'EndMonthComboBox
+        '
+        Me.EndMonthComboBox.FormattingEnabled = True
+        Me.EndMonthComboBox.Location = New System.Drawing.Point(454, 424)
+        Me.EndMonthComboBox.Name = "EndMonthComboBox"
+        Me.EndMonthComboBox.Size = New System.Drawing.Size(47, 35)
+        Me.EndMonthComboBox.TabIndex = 32
+        '
+        'EndYearComboBox
+        '
+        Me.EndYearComboBox.FormattingEnabled = True
+        Me.EndYearComboBox.Location = New System.Drawing.Point(330, 424)
+        Me.EndYearComboBox.Name = "EndYearComboBox"
+        Me.EndYearComboBox.Size = New System.Drawing.Size(87, 35)
+        Me.EndYearComboBox.TabIndex = 30
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(584, 427)
+        Me.Label15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(33, 27)
+        Me.Label15.TabIndex = 35
+        Me.Label15.Text = "日"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(499, 427)
+        Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(33, 27)
+        Me.Label16.TabIndex = 33
+        Me.Label16.Text = "月"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(414, 427)
+        Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(33, 27)
+        Me.Label17.TabIndex = 31
+        Me.Label17.Text = "年"
         '
         'BookDetail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 27.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(796, 841)
-        Me.Controls.Add(Me.EndDateTimePicker)
-        Me.Controls.Add(Me.StartDateTimePicker)
-        Me.Controls.Add(Me.BuyDateTimePicker)
+        Me.Controls.Add(Me.EndDayComboBox)
+        Me.Controls.Add(Me.EndMonthComboBox)
+        Me.Controls.Add(Me.EndYearComboBox)
+        Me.Controls.Add(Me.Label15)
+        Me.Controls.Add(Me.Label16)
+        Me.Controls.Add(Me.Label17)
+        Me.Controls.Add(Me.StartDayComboBox)
+        Me.Controls.Add(Me.StartMonthComboBox)
+        Me.Controls.Add(Me.StartYearComboBox)
+        Me.Controls.Add(Me.Label12)
+        Me.Controls.Add(Me.Label13)
+        Me.Controls.Add(Me.Label14)
+        Me.Controls.Add(Me.BuyDayComboBox)
+        Me.Controls.Add(Me.BuyMonthComboBox)
+        Me.Controls.Add(Me.BuyYearComboBox)
+        Me.Controls.Add(Me.Label11)
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.ReviewLabel)
         Me.Controls.Add(Me.ReviewTrackBar)
         Me.Controls.Add(Me.GenreTextBox)
@@ -287,7 +455,22 @@ Partial Class BookDetail
     Friend WithEvents GenreTextBox As TextBox
     Friend WithEvents ReviewTrackBar As TrackBar
     Friend WithEvents ReviewLabel As Label
-    Friend WithEvents BuyDateTimePicker As DateTimePicker
-    Friend WithEvents StartDateTimePicker As DateTimePicker
-    Friend WithEvents EndDateTimePicker As DateTimePicker
+    Friend WithEvents BuyYearComboBox As ComboBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents BuyMonthComboBox As ComboBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents BuyDayComboBox As ComboBox
+    Friend WithEvents StartDayComboBox As ComboBox
+    Friend WithEvents StartMonthComboBox As ComboBox
+    Friend WithEvents StartYearComboBox As ComboBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents EndDayComboBox As ComboBox
+    Friend WithEvents EndMonthComboBox As ComboBox
+    Friend WithEvents EndYearComboBox As ComboBox
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label16 As Label
+    Friend WithEvents Label17 As Label
 End Class
