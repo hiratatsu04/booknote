@@ -5,7 +5,7 @@
 
 ## 概要
 
-仕様：#1
+仕様：https://github.com/hiratatsu04/booknote/issues/1
 
 ## 開発環境
 
