@@ -86,6 +86,7 @@ Partial Class BookDetail
         '
         'BookImagePictureBox
         '
+        Me.BookImagePictureBox.Image = Global.booknote.My.Resources.Resources.noimage
         Me.BookImagePictureBox.Location = New System.Drawing.Point(11, 68)
         Me.BookImagePictureBox.Margin = New System.Windows.Forms.Padding(4)
         Me.BookImagePictureBox.Name = "BookImagePictureBox"
