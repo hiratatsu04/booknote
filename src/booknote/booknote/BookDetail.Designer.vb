@@ -89,7 +89,8 @@ Partial Class BookDetail
         Me.BookImagePictureBox.Location = New System.Drawing.Point(11, 68)
         Me.BookImagePictureBox.Margin = New System.Windows.Forms.Padding(4)
         Me.BookImagePictureBox.Name = "BookImagePictureBox"
-        Me.BookImagePictureBox.Size = New System.Drawing.Size(202, 238)
+        Me.BookImagePictureBox.Size = New System.Drawing.Size(181, 242)
+        Me.BookImagePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.BookImagePictureBox.TabIndex = 2
         Me.BookImagePictureBox.TabStop = False
         '
@@ -391,7 +392,7 @@ Partial Class BookDetail
         'RegisterImageButton
         '
         Me.RegisterImageButton.Font = New System.Drawing.Font("游ゴシック", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RegisterImageButton.Location = New System.Drawing.Point(11, 314)
+        Me.RegisterImageButton.Location = New System.Drawing.Point(11, 318)
         Me.RegisterImageButton.Margin = New System.Windows.Forms.Padding(4)
         Me.RegisterImageButton.Name = "RegisterImageButton"
         Me.RegisterImageButton.Size = New System.Drawing.Size(108, 29)
