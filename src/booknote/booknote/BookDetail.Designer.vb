@@ -23,7 +23,7 @@ Partial Class BookDetail
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ReturnButton = New System.Windows.Forms.Button()
-        Me.EditButton = New System.Windows.Forms.Button()
+        Me.SaveButton = New System.Windows.Forms.Button()
         Me.BookImagePictureBox = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -72,16 +72,16 @@ Partial Class BookDetail
         Me.ReturnButton.Text = "戻る"
         Me.ReturnButton.UseVisualStyleBackColor = True
         '
-        'EditButton
+        'SaveButton
         '
-        Me.EditButton.Location = New System.Drawing.Point(713, 10)
-        Me.EditButton.Margin = New System.Windows.Forms.Padding(4)
-        Me.EditButton.Name = "EditButton"
-        Me.EditButton.Size = New System.Drawing.Size(70, 39)
-        Me.EditButton.TabIndex = 10
-        Me.EditButton.TabStop = False
-        Me.EditButton.Text = "編集"
-        Me.EditButton.UseVisualStyleBackColor = True
+        Me.SaveButton.Location = New System.Drawing.Point(713, 10)
+        Me.SaveButton.Margin = New System.Windows.Forms.Padding(4)
+        Me.SaveButton.Name = "SaveButton"
+        Me.SaveButton.Size = New System.Drawing.Size(70, 39)
+        Me.SaveButton.TabIndex = 10
+        Me.SaveButton.TabStop = False
+        Me.SaveButton.Text = "保存"
+        Me.SaveButton.UseVisualStyleBackColor = True
         '
         'BookImagePictureBox
         '
@@ -425,7 +425,7 @@ Partial Class BookDetail
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BookImagePictureBox)
-        Me.Controls.Add(Me.EditButton)
+        Me.Controls.Add(Me.SaveButton)
         Me.Controls.Add(Me.ReturnButton)
         Me.Font = New System.Drawing.Font("游ゴシック", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
@@ -439,7 +439,7 @@ Partial Class BookDetail
     End Sub
 
     Friend WithEvents ReturnButton As Button
-    Friend WithEvents EditButton As Button
+    Friend WithEvents SaveButton As Button
     Friend WithEvents BookImagePictureBox As PictureBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label

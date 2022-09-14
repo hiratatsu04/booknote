@@ -9,6 +9,7 @@ Public Class BookDetail
 
     Private Sub BookDetail_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ' ComboBoxの初期化
         For i As Integer = 1980 To 2022
             BuyYearComboBox.Items.Add(i)
             StartYearComboBox.Items.Add(i)
@@ -27,4 +28,7 @@ Public Class BookDetail
 
     End Sub
 
+    Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
+
+    End Sub
 End Class
