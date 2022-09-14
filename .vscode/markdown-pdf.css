@@ -1,0 +1,76 @@
+html, body {
+  font-family: 'Times New Roman', 'Century', 'ＭＳ 明朝', serif;
+}
+h1, h2, h3, h4, h5, h6,
+.toc.header {
+  font-family: "游ゴシック体", "Yu Gothic", YuGothic, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", sans-serif;
+}
+code, pre {
+  font-family: Consolas, 'Courier New', Courier, Monaco, 'ＭＳ ゴシック', monospace !important;
+}
+.stamps {
+  float: right;
+  border: 1px solid #000;
+}
+.stamps th, .stamps td {
+  border-left: 1px solid #000;
+  width: 1.5cm;
+  line-height: 1;
+}
+.stamps td {
+  height: 1.2cm;
+  text-align: center;
+}
+img.center-img {
+  max-width: 100%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  min-height: auto;
+  max-height: none;
+}
+pre code {
+  display: block;
+  font-size: 12px;
+  line-height: 1.2;
+}
+.page-break {
+  display: block;
+  page-break-before: always;
+}
+h1 {
+  font-size: 24px;
+}
+h2,
+div.toc.header {
+  font-size: 18px;
+  padding-bottom: 1mm;
+  border-bottom: 3px double silver;
+}
+h3 {
+  font-size: 16px;
+  padding-bottom: 2mm;
+  border-bottom: 1px solid silver;
+  margin-top: 6mm;
+  margin-bottom: 3mm;
+}
+h2 + h3 {
+  margin-top: 3mm;
+}
+h4 {
+  border-bottom: 1px solid silver;
+}
+pre.hljs code {
+  font-size: 10px;
+  line-height: 1.2;
+}
+pre.hljs code > div {
+  padding: 0;
+}
+table {
+  font-size: 12px;
+  line-height: 1.2;
+}
+table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table > tbody > tr > td {
+  padding: 4px 8px;
+}
