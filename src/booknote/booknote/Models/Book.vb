@@ -3,10 +3,10 @@ Option Strict On
 Public Class Book
 
     ' フィールドの定義
-    Private ID As String
+    Private ID As Integer
     Public Property Title As String
     Public Property Author As String
-    Public Property Bookimage As System.Drawing.Image
+    Public Property Bookimage As Image
     Public Property Genre As String
     Public Property ReviewValue As Double
     Public Property Memo As String
@@ -15,8 +15,6 @@ Public Class Book
     Public Property EndReadDate As Date
     Public Property RecodeDate As Date
     Public Property UpdateDate As Date
-
-    ' 振る舞いの定義
 
 
 End Class
