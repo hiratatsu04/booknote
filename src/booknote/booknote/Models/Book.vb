@@ -13,7 +13,8 @@ Public Class Book
     Public Property BuyDate As Date
     Public Property StartReadDate As Date
     Public Property EndReadDate As Date
-
+    Public Property RecodeDate As Date
+    Public Property UpdateDate As Date
 
     ' 振る舞いの定義
 
