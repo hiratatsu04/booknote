@@ -1,3 +1,5 @@
+Option Strict On
+
 Public Class BookList
     Private Sub BtnRegister_Click(sender As Object, e As EventArgs) Handles RegisterButton.Click
 
