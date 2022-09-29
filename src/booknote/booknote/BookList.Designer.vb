@@ -73,7 +73,7 @@ Partial Class BookList
         Me.Controls.Add(Me.BookListView)
         Me.Controls.Add(Me.RegisterButton)
         Me.Font = New System.Drawing.Font("游ゴシック", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.Name = "BookList"
         Me.Text = "BookList"

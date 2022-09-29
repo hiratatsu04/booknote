@@ -6,6 +6,19 @@ Public Class BookDetail
     Private book As Book
     Private id As Integer
 
+    'Sub New()
+    'End Sub
+
+    'Sub New(id As Integer)
+    'End Sub
+
+    Public Overloads Sub Show(ByVal owner As IWin32Window,
+                            ByVal id As Integer)
+        Me.id = id
+        MyBase.Show(owner)
+        ShowBookData()
+    End Sub
+
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles ReviewTrackBar.Scroll
 
         ReviewLabel.Text = (ReviewTrackBar.Value / 10).ToString("0.0")
@@ -111,5 +124,23 @@ Public Class BookDetail
 
         manageDB.UpdateBookData(book)
 
+    End Sub
+
+    Private Sub ShowBookData()
+        manageDB = New ManageDB()
+        Dim book As Book = manageDB.GetOneBookData(id)
+
+        TitleTextBox.Text = book.Title
+        AuthorTextBox.Text = book.Author
+        BookImagePictureBox.Image = book.BookImage
+        GenreTextBox.Text = book.Genre
+        ReviewLabel.Text = (book.ReviewValue / 10).ToString()
+        ReviewTrackBar.Value = CType(book.ReviewValue, Integer)
+        MemoRichTextBox.Text = book.Memo
+        BuyDateTextBox.Text = book.BuyDate.ToString("yyyyMMdd")
+        StartDateTextBox.Text = book.StartReadDate.ToString("yyyyMMdd")
+        EndDateTextBox.Text = book.EndReadDate.ToString("yyyyMMdd")
+
+        id = book.ID
     End Sub
 End Class

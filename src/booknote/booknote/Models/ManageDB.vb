@@ -34,7 +34,8 @@ Public Class ManageDB
             author = '{book.Author}', book_image = @image,
             genre = '{book.Genre}', review_value = '{book.ReviewValue}',
             memo = '{book.Memo}', buy_date = '{book.BuyDate}',
-            start_date = '{book.StartReadDate}', end_date = '{book.EndReadDate}'
+            start_date = '{book.StartReadDate}', end_date = '{book.EndReadDate}',
+            update_date = '{System.DateTime.Now}'
             WHERE id = {book.ID};"
 
         ' ここ何をしているのか不明

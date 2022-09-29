@@ -8,7 +8,7 @@ Public Class BookList
     Private Sub BtnRegister_Click(sender As Object, e As EventArgs) Handles RegisterButton.Click
 
         Dim f As New BookDetail()
-        f.ShowDialog(Me)
+        f.Show(Me)
 
     End Sub
 
@@ -51,7 +51,13 @@ Public Class BookList
             BookListView.Items.Add(bookTitle(i), i)
         Next
 
+        'ポイントで選択できるようにする
+        BookListView.HoverSelection = True
+        ' シングルクリックでアクティブにする
+        BookListView.Activation = ItemActivation.OneClick
+
     End Sub
+
 
     ' 幅w、高さhのImageオブジェクトを作成
     ' 何しているのかまだわかっていない。後で理解する。
@@ -111,5 +117,15 @@ Public Class BookList
         For i As Integer = 0 To (BookImageList.Images.Count - 1)
             BookListView.Items.Add(bookTitle(i), i)
         Next
+    End Sub
+
+    Private Sub BookListViewItemActivate(sender As Object, e As EventArgs) Handles BookListView.ItemActivate
+
+        Dim lv As ListView = DirectCast(sender, ListView)
+        Dim id As Integer = bookList(lv.FocusedItem.Index).ID
+
+        Dim f As New BookDetail()
+        f.Show(Me, id)
+
     End Sub
 End Class
