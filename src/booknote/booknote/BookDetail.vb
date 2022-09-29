@@ -31,14 +31,9 @@ Public Class BookDetail
     ' bookの値の有無で「更新」か「新規保存」か場合分けてしている
     Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
 
-        Dim id As Integer = Nothing
-
-        If book IsNot Nothing Then
-            id = book.ID
+        If book Is Nothing Then
+            book = New Book()
         End If
-
-        manageDB = New ManageDB()
-        book = New Book()
 
         book.Title = TitleTextBox.Text
         book.Author = AuthorTextBox.Text
@@ -50,11 +45,12 @@ Public Class BookDetail
         book.StartReadDate = ConvertStringToDate(StartDateTextBox.Text)
         book.EndReadDate = ConvertStringToDate(EndDateTextBox.Text)
 
-        If id <> Nothing Then
-            book.ID = id
-            manageDB.UpdateBookData(book)
-        Else
+        manageDB = New ManageDB()
+
+        If book.ID Is Nothing Then
             manageDB.RecodeBook(book)
+        Else
+            manageDB.UpdateBookData(book)
         End If
 
         ControlShowMode()
@@ -63,6 +59,11 @@ Public Class BookDetail
 
     ' 画像登録ボタンの動作
     ' ダイアログを表示し、PictureBoxに選択した画像を表示する
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub RegisterImageButton_Click(sender As Object, e As EventArgs) Handles RegisterImageButton.Click
 
         'OpenFileDialogクラスのインスタンスを作成

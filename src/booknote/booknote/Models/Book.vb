@@ -3,7 +3,7 @@ Option Strict On
 Public Class Book
 
     ' フィールドの定義
-    Public Property ID As Integer
+    Public Property ID As Integer?
     Public Property Title As String
     Public Property Author As String
     Public Property BookImage As Image
