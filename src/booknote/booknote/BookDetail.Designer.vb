@@ -45,6 +45,7 @@ Partial Class BookDetail
         Me.StartDateTextBox = New System.Windows.Forms.TextBox()
         Me.EndDateTextBox = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         CType(Me.ReviewTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BookImagePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -262,7 +263,7 @@ Partial Class BookDetail
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(226, 10)
+        Me.Button1.Location = New System.Drawing.Point(114, 10)
         Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(245, 39)
@@ -271,11 +272,23 @@ Partial Class BookDetail
         Me.Button1.Text = "3を読み込み(テスト用)"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(399, 10)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(245, 39)
+        Me.Button2.TabIndex = 42
+        Me.Button2.TabStop = False
+        Me.Button2.Text = "更新(テスト用)"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'BookDetail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 27.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(796, 841)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.EndDateTextBox)
         Me.Controls.Add(Me.StartDateTextBox)
@@ -333,4 +346,5 @@ Partial Class BookDetail
     Friend WithEvents StartDateTextBox As TextBox
     Friend WithEvents EndDateTextBox As TextBox
     Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
 End Class

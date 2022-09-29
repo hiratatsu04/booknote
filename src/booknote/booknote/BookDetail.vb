@@ -2,8 +2,9 @@ Option Strict On
 
 Public Class BookDetail
 
-    Dim manageDB As ManageDB
-    Dim book As Book
+    Private manageDB As ManageDB
+    Private book As Book
+    Private id As Integer
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles ReviewTrackBar.Scroll
 
@@ -83,9 +84,32 @@ Public Class BookDetail
         ReviewLabel.Text = (book.ReviewValue / 10).ToString()
         ReviewTrackBar.Value = CType(book.ReviewValue, Integer)
         MemoRichTextBox.Text = book.Memo
-        BuyDateTextBox.Text = book.BuyDate.ToString()
-        StartDateTextBox.Text = book.StartReadDate.ToString()
-        EndDateTextBox.Text = book.EndReadDate.ToString()
+        BuyDateTextBox.Text = book.BuyDate.ToString("yyyyMMdd")
+        StartDateTextBox.Text = book.StartReadDate.ToString("yyyyMMdd")
+        EndDateTextBox.Text = book.EndReadDate.ToString("yyyyMMdd")
+
+        id = book.ID
+
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        manageDB = New ManageDB()
+        book = New Book()
+
+        book.Title = TitleTextBox.Text
+        book.Author = AuthorTextBox.Text
+        book.BookImage = BookImagePictureBox.Image
+        book.Genre = GenreTextBox.Text
+        book.ReviewValue = ReviewTrackBar.Value
+        book.Memo = MemoRichTextBox.Text
+        book.BuyDate = ConvertStringToDate(BuyDateTextBox.Text)
+        book.StartReadDate = ConvertStringToDate(StartDateTextBox.Text)
+        book.EndReadDate = ConvertStringToDate(EndDateTextBox.Text)
+
+        book.ID = id
+
+        manageDB.UpdateBookData(book)
 
     End Sub
 End Class

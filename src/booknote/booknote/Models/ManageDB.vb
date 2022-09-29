@@ -24,6 +24,30 @@ Public Class ManageDB
 
     End Sub
 
+    Public Sub UpdateBookData(book As Book)
+
+        ConnectDB()   ' データベースへ接続
+        commandDB.Connection = connectToDB
+
+        commandDB.CommandText =
+            $"UPDATE books SET title = '{book.Title}',
+            author = '{book.Author}', book_image = @image,
+            genre = '{book.Genre}', review_value = '{book.ReviewValue}',
+            memo = '{book.Memo}', buy_date = '{book.BuyDate}',
+            start_date = '{book.StartReadDate}', end_date = '{book.EndReadDate}'
+            WHERE id = {book.ID};"
+
+        ' ここ何をしているのか不明
+        Dim imageData As Byte() = ConvertImageToByte(book.BookImage)
+        Dim param As SQLiteParameter = New SQLiteParameter("@image", DbType.Binary)
+        param.Value = imageData
+        commandDB.Parameters.Add(param)
+        commandDB.ExecuteNonQuery()
+
+        connectToDB.Close()
+
+    End Sub
+
     Public Function GetOneBookData(ID As Integer) As Book
 
         Dim bookInfo As New Book()

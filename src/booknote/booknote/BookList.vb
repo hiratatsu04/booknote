@@ -2,8 +2,8 @@ Option Strict On
 
 Public Class BookList
 
-    Dim bookList As List(Of Book)
-    Dim manageDB As ManageDB
+    Private bookList As List(Of Book)
+    Private manageDB As ManageDB
 
     Private Sub BtnRegister_Click(sender As Object, e As EventArgs) Handles RegisterButton.Click
 
