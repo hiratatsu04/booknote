@@ -122,10 +122,10 @@ Public Class BookList
     Private Sub BookListViewItemActivate(sender As Object, e As EventArgs) Handles BookListView.ItemActivate
 
         Dim lv As ListView = DirectCast(sender, ListView)
-        Dim id As Integer = bookList(lv.FocusedItem.Index).ID
+        Dim book As Book = bookList(lv.FocusedItem.Index)
 
         Dim f As New BookDetail()
-        f.Show(Me, id)
+        f.Show(Me, book)
 
     End Sub
 End Class

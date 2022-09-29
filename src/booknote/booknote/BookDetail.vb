@@ -4,29 +4,19 @@ Public Class BookDetail
 
     Private manageDB As ManageDB
     Private book As Book
-    Private id As Integer
 
+    ' idを指定して本の情報を開く場合の設定
     Public Overloads Sub Show(ByVal owner As IWin32Window,
-                            ByVal id As Integer)
-        Me.id = id
+                            ByVal book As Book)
+        Me.book = book
         MyBase.Show(owner)
         ShowBookData()
 
-        EditButton.Enabled = True
-        TitleTextBox.Enabled = False
-        AuthorTextBox.Enabled = False
-        RegisterImageButton.Enabled = False
-        GenreTextBox.Enabled = False
-        ReviewLabel.Enabled = False
-        ReviewTrackBar.Enabled = False
-        MemoRichTextBox.Enabled = False
-        BuyDateTextBox.Enabled = False
-        StartDateTextBox.Enabled = False
-        EndDateTextBox.Enabled = False
-        SaveButton.Enabled = False
+        ControlShowMode()
 
     End Sub
 
+    ' TrackBarがInteger型しか受け付けないので、10で割っている
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles ReviewTrackBar.Scroll
 
         ReviewLabel.Text = (ReviewTrackBar.Value / 10).ToString("0.0")
@@ -34,6 +24,12 @@ Public Class BookDetail
     End Sub
 
     Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
+
+        Dim id As Integer = Nothing
+
+        If book IsNot Nothing Then
+            id = book.ID
+        End If
 
         manageDB = New ManageDB()
         book = New Book()
@@ -48,20 +44,14 @@ Public Class BookDetail
         book.StartReadDate = ConvertStringToDate(StartDateTextBox.Text)
         book.EndReadDate = ConvertStringToDate(EndDateTextBox.Text)
 
-        manageDB.RecodeBook(book)
+        If id <> Nothing Then
+            book.ID = id
+            manageDB.UpdateBookData(book)
+        Else
+            manageDB.RecodeBook(book)
+        End If
 
-        EditButton.Enabled = True
-        TitleTextBox.Enabled = False
-        AuthorTextBox.Enabled = False
-        RegisterImageButton.Enabled = False
-        GenreTextBox.Enabled = False
-        ReviewLabel.Enabled = False
-        ReviewTrackBar.Enabled = False
-        MemoRichTextBox.Enabled = False
-        BuyDateTextBox.Enabled = False
-        StartDateTextBox.Enabled = False
-        EndDateTextBox.Enabled = False
-        SaveButton.Enabled = False
+        ControlShowMode()
 
     End Sub
 
@@ -106,9 +96,10 @@ Public Class BookDetail
 
     End Sub
 
+    ''' <summary>
+    ''' 設定されているidのデータを各種コントロールに設定する
+    ''' </summary>
     Private Sub ShowBookData()
-        manageDB = New ManageDB()
-        Dim book As Book = manageDB.GetOneBookData(id)
 
         TitleTextBox.Text = book.Title
         AuthorTextBox.Text = book.Author
@@ -121,10 +112,18 @@ Public Class BookDetail
         StartDateTextBox.Text = book.StartReadDate.ToString("yyyyMMdd")
         EndDateTextBox.Text = book.EndReadDate.ToString("yyyyMMdd")
 
-        id = book.ID
     End Sub
 
     Private Sub EditButton_Click(sender As Object, e As EventArgs) Handles EditButton.Click
+
+        ControlEditMode()
+
+    End Sub
+
+    ''' <summary>
+    ''' 編集できるように各種コントロールをEnable = Trueにする
+    ''' </summary>
+    Private Sub ControlEditMode()
         TitleTextBox.Enabled = True
         AuthorTextBox.Enabled = True
         RegisterImageButton.Enabled = True
@@ -137,5 +136,25 @@ Public Class BookDetail
         EndDateTextBox.Enabled = True
         SaveButton.Enabled = True
         EditButton.Enabled = False
+        SaveButton.Text = "更新"
     End Sub
+
+    ''' <summary>
+    ''' 編集できないように各種コントロールをEnable = Falseにする
+    ''' </summary>
+    Private Sub ControlShowMode()
+        EditButton.Enabled = True
+        TitleTextBox.Enabled = False
+        AuthorTextBox.Enabled = False
+        RegisterImageButton.Enabled = False
+        GenreTextBox.Enabled = False
+        ReviewLabel.Enabled = False
+        ReviewTrackBar.Enabled = False
+        MemoRichTextBox.Enabled = False
+        BuyDateTextBox.Enabled = False
+        StartDateTextBox.Enabled = False
+        EndDateTextBox.Enabled = False
+        SaveButton.Enabled = False
+    End Sub
+
 End Class
