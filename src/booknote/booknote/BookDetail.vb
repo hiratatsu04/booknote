@@ -11,10 +11,13 @@ Public Class BookDetail
 
     End Sub
 
+<<<<<<< HEAD
     Private Sub BookDetail_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 
+=======
+>>>>>>> 0cb0d37996d561943806b656063c0cc7c294834e
     Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
 
         manageDB = New ManageDB()
@@ -52,6 +55,26 @@ Public Class BookDetail
 
             BookImagePictureBox.SizeMode = PictureBoxSizeMode.StretchImage
             BookImagePictureBox.Image = bookImage
+        End If
+
+    End Sub
+
+    Private Sub BuyDateTextBox_Leave(sender As Object, e As EventArgs) Handles BuyDateTextBox.Leave
+
+        Dim buyDate As Date
+
+        'Dim buyDateString As String = BuyDateTextBox.Text.Insert(6, "/"c).Insert(4, "/"c)
+        'If Not DateTime.TryParse(buyDateString, buyDate) Then
+        '    MessageBox.Show($"{BuyDateTextBox.Text}の値をDate型に変換できません。")
+        '    BuyDateTextBox.Text = String.Empty
+        '    BuyDateTextBox.Focus()
+        'End If
+
+        If Not DateTime.TryParseExact(BuyDateTextBox.Text, "yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo, System.Globalization.DateTimeStyles.None, buyDate) Then
+
+            MessageBox.Show($"{BuyDateTextBox.Text}の値をDate型に変換できません。")
+            BuyDateTextBox.Text = String.Empty
+
         End If
 
     End Sub
