@@ -2,9 +2,12 @@ Option Strict On
 
 Public Class BookList
 
+    ' 一覧表示のためのリスト型変数
     Private bookList As List(Of Book)
+    ' サーバー操作のための変数
     Private manageDB As ManageDB
 
+    ' 登録ボタン押下でBookDetailフォームを開く。Showにbookを引数として指定せず、新規登録画面として開く。
     Private Sub BtnRegister_Click(sender As Object, e As EventArgs) Handles RegisterButton.Click
 
         Dim f As New BookDetail()
@@ -12,6 +15,9 @@ Public Class BookList
 
     End Sub
 
+    ' フォーム読み込み時の初期設定
+    ' データベースから本全件取得し表示する
+    ' BookListViewの設定も行っている（HoverSelectionとActivationの設定）
     Private Sub BookList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         manageDB = New ManageDB()
@@ -51,7 +57,7 @@ Public Class BookList
             BookListView.Items.Add(bookTitle(i), i)
         Next
 
-        'ポイントで選択できるようにする
+        ' ポイントで選択できるようにする
         BookListView.HoverSelection = True
         ' シングルクリックでアクティブにする
         BookListView.Activation = ItemActivation.OneClick
@@ -80,6 +86,8 @@ Public Class BookList
         Return canvas
     End Function
 
+    ' 更新ボタン（最終的には消す予定）を押したときの動作
+    ' BookDetailフォームからBookListフォームに戻った時にこの動作を実装したい。
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         manageDB = New ManageDB()
         ' 登録してある本の全件を取得
@@ -89,6 +97,7 @@ Public Class BookList
         Dim width As Integer = 250
         Dim height As Integer = 200
 
+        ' ImageListとLIstViewを初期化
         BookImageList.Dispose()
         BookListView.Clear()
         BookImageList.ImageSize = New Size(width, height)
@@ -119,6 +128,8 @@ Public Class BookList
         Next
     End Sub
 
+    ' ListViewに表示されているコントロールをシングルクリックしたときの動作
+    ' bookオブジェクトを引数に指定する
     Private Sub BookListViewItemActivate(sender As Object, e As EventArgs) Handles BookListView.ItemActivate
 
         Dim lv As ListView = DirectCast(sender, ListView)

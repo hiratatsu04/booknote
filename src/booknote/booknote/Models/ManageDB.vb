@@ -10,7 +10,7 @@ Public Class ManageDB
     Private dataReader As SQLiteDataReader
 
     ' データベースの保管場所
-    Private Const dbPath As String = "C:\Users\tatsuya-hirano\Documents\repos\booknote\src\booknote\db\books.db"
+    Private dbPath As String = System.Environment.CurrentDirectory + "\database\books.db"
 
     ' データベースへ接続
     Public Sub ConnectDB()
@@ -24,6 +24,10 @@ Public Class ManageDB
 
     End Sub
 
+    ''' <summary>
+    ''' データベースの値を引数bookに更新する。
+    ''' </summary>
+    ''' <param name="book"></param>
     Public Sub UpdateBookData(book As Book)
 
         ConnectDB()   ' データベースへ接続
@@ -49,6 +53,11 @@ Public Class ManageDB
 
     End Sub
 
+    ''' <summary>
+    ''' 引数IDに該当するデータをデータベースから取得する
+    ''' </summary>
+    ''' <param name="ID"></param>
+    ''' <returns></returns>
     Public Function GetOneBookData(ID As Integer) As Book
 
         Dim bookInfo As New Book()
@@ -87,7 +96,7 @@ Public Class ManageDB
     End Function
 
     ''' <summary>
-    ''' 
+    ''' データベースに保存されている全データを取得する
     ''' </summary>
     ''' <returns></returns>
     Public Function GetAllBookData() As List(Of Book)
@@ -126,6 +135,10 @@ Public Class ManageDB
         Return bookList
     End Function
 
+    ''' <summary>
+    ''' 引数bookの値をデータベースに新規登録する
+    ''' </summary>
+    ''' <param name="book"></param>
     Public Sub RecodeBook(book As Book)
 
         ConnectDB()   ' データベースへ接続
@@ -148,12 +161,22 @@ Public Class ManageDB
         connectToDB.Close()
     End Sub
 
+    ''' <summary>
+    ''' Image型からByte型へ変換する
+    ''' </summary>
+    ''' <param name="image"></param>
+    ''' <returns></returns>
     Public Shared Function ConvertImageToByte(image As Image) As Byte()
         Dim converter As New ImageConverter()
         Dim imageByte As Byte() = CType(converter.ConvertTo(image, GetType(Byte())), Byte())
         Return imageByte
     End Function
 
+    ''' <summary>
+    ''' BLOB型からImage型へ変換する
+    ''' </summary>
+    ''' <param name="imageObject"></param>
+    ''' <returns></returns>
     Public Shared Function ConvertBLOBToImage(imageObject As Object) As Image
         Dim image As Image = Nothing
 
@@ -165,6 +188,13 @@ Public Class ManageDB
         Return image
     End Function
 
+    ''' <summary>
+    ''' 引数の値がDBNullかどうか判定する
+    ''' DBNullであればNothingを返す
+    ''' DBNullでなければ、そのまま返す
+    ''' </summary>
+    ''' <param name="value"></param>
+    ''' <returns></returns>
     Public Shared Function CheckDBNull(value As Object) As Object
         Dim returnValue As Object = Nothing
 

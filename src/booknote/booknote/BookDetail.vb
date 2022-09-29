@@ -5,7 +5,11 @@ Public Class BookDetail
     Private manageDB As ManageDB
     Private book As Book
 
-    ' idを指定して本の情報を開く場合の設定
+    ''' <summary>
+    ''' 引数にbookを指定すると、bookの情報をフォームに表示する
+    ''' </summary>
+    ''' <param name="owner"></param>
+    ''' <param name="book"></param>
     Public Overloads Sub Show(ByVal owner As IWin32Window,
                             ByVal book As Book)
         Me.book = book
@@ -23,6 +27,8 @@ Public Class BookDetail
 
     End Sub
 
+    ' 保存ボタンの動作
+    ' bookの値の有無で「更新」か「新規保存」か場合分けてしている
     Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
 
         Dim id As Integer = Nothing
@@ -55,6 +61,8 @@ Public Class BookDetail
 
     End Sub
 
+    ' 画像登録ボタンの動作
+    ' ダイアログを表示し、PictureBoxに選択した画像を表示する
     Private Sub RegisterImageButton_Click(sender As Object, e As EventArgs) Handles RegisterImageButton.Click
 
         'OpenFileDialogクラスのインスタンスを作成
@@ -76,6 +84,11 @@ Public Class BookDetail
 
     End Sub
 
+    ''' <summary>
+    ''' String型のデータをDate型に変換する。
+    ''' </summary>
+    ''' <param name="str"></param>
+    ''' <returns></returns>
     Private Function ConvertStringToDate(str As String) As Date
 
         Dim convertedDate As Date = Nothing
@@ -90,6 +103,8 @@ Public Class BookDetail
 
     End Function
 
+    ' 戻るボタンの動作
+    ' 戻ると同時に、BookListに一覧表示動作をさせたいが未実装
     Private Sub ReturnButton_Click(sender As Object, e As EventArgs) Handles ReturnButton.Click
 
         Me.Close()
@@ -97,7 +112,7 @@ Public Class BookDetail
     End Sub
 
     ''' <summary>
-    ''' 設定されているidのデータを各種コントロールに設定する
+    ''' 設定されているbookのデータを各種コントロールに代入する
     ''' </summary>
     Private Sub ShowBookData()
 
@@ -114,6 +129,7 @@ Public Class BookDetail
 
     End Sub
 
+    ' 編集ボタン押下時の動作
     Private Sub EditButton_Click(sender As Object, e As EventArgs) Handles EditButton.Click
 
         ControlEditMode()
