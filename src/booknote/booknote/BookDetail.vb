@@ -70,4 +70,22 @@ Public Class BookDetail
         Me.Close()
 
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        manageDB = New ManageDB()
+        Dim book As Book = manageDB.GetOneBookData(3)
+
+        TitleTextBox.Text = book.Title
+        AuthorTextBox.Text = book.Author
+        BookImagePictureBox.Image = book.BookImage
+        GenreTextBox.Text = book.Genre
+        ReviewLabel.Text = (book.ReviewValue / 10).ToString()
+        ReviewTrackBar.Value = CType(book.ReviewValue, Integer)
+        MemoRichTextBox.Text = book.Memo
+        BuyDateTextBox.Text = book.BuyDate.ToString()
+        StartDateTextBox.Text = book.StartReadDate.ToString()
+        EndDateTextBox.Text = book.EndReadDate.ToString()
+
+    End Sub
 End Class

@@ -22,6 +22,8 @@ Public Class BookList
         Dim width As Integer = 250
         Dim height As Integer = 200
 
+        BookImageList.Dispose()
+        BookListView.Clear()
         BookImageList.ImageSize = New Size(Width, Height)
         BookListView.LargeImageList = BookImageList
 
@@ -81,6 +83,8 @@ Public Class BookList
         Dim width As Integer = 250
         Dim height As Integer = 200
 
+        BookImageList.Dispose()
+        BookListView.Clear()
         BookImageList.ImageSize = New Size(width, height)
         BookListView.LargeImageList = BookImageList
 

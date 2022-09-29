@@ -44,6 +44,7 @@ Partial Class BookDetail
         Me.Label9 = New System.Windows.Forms.Label()
         Me.StartDateTextBox = New System.Windows.Forms.TextBox()
         Me.EndDateTextBox = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.ReviewTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BookImagePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -259,11 +260,23 @@ Partial Class BookDetail
         Me.EndDateTextBox.Size = New System.Drawing.Size(182, 41)
         Me.EndDateTextBox.TabIndex = 40
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(226, 10)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(245, 39)
+        Me.Button1.TabIndex = 41
+        Me.Button1.TabStop = False
+        Me.Button1.Text = "3を読み込み(テスト用)"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'BookDetail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 27.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(796, 841)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.EndDateTextBox)
         Me.Controls.Add(Me.StartDateTextBox)
         Me.Controls.Add(Me.Label9)
@@ -319,4 +332,5 @@ Partial Class BookDetail
     Friend WithEvents Label9 As Label
     Friend WithEvents StartDateTextBox As TextBox
     Friend WithEvents EndDateTextBox As TextBox
+    Friend WithEvents Button1 As Button
 End Class

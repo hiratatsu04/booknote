@@ -5,9 +5,9 @@ Imports System.Data.SQLite
 Public Class ManageDB
 
     ' データベース関連変数の作成
-    Public Property connectToDB As SQLiteConnection
-    Public Property commandDB As SQLiteCommand
-    Public Property dataReader As SQLiteDataReader
+    Private connectToDB As SQLiteConnection
+    Private commandDB As SQLiteCommand
+    Private dataReader As SQLiteDataReader
 
     ' データベースの保管場所
     Private Const dbPath As String = "C:\Users\tatsuya-hirano\Documents\repos\booknote\src\booknote\db\books.db"
@@ -23,6 +23,43 @@ Public Class ManageDB
         connectToDB.Open()
 
     End Sub
+
+    Public Function GetOneBookData(ID As Integer) As Book
+
+        Dim bookInfo As New Book()
+
+        ConnectDB()   ' データベースへ接続
+        commandDB.Connection = connectToDB
+        commandDB.CommandText = "SELECT * FROM books;"
+
+        ' SQLの実行結果を受け取る
+        dataReader = commandDB.ExecuteReader()
+
+        ' IDと一致するデータをプロパティに設定
+        If (dataReader.HasRows) Then
+            While (dataReader.Read())
+                If CType(dataReader("id"), Integer) = ID Then
+                    bookInfo.ID = CType(dataReader("id"), Integer)
+                    bookInfo.Title = dataReader("title").ToString()
+                    bookInfo.Author = dataReader("author").ToString()
+                    bookInfo.BookImage = ConvertBLOBToImage(dataReader("book_image"))
+                    bookInfo.Genre = dataReader("genre").ToString()
+                    bookInfo.ReviewValue = CType(CheckDBNull(dataReader("review_value")), Double)
+                    bookInfo.Memo = dataReader("memo").ToString()
+                    bookInfo.BuyDate = CType(CheckDBNull(dataReader("buy_date")), Date)
+                    bookInfo.StartReadDate = CType(CheckDBNull(dataReader("start_date")), Date)
+                    bookInfo.EndReadDate = CType(CheckDBNull(dataReader("end_date")), Date)
+                    bookInfo.RecodeDate = CType(CheckDBNull(dataReader("recode_date")), Date)
+                    bookInfo.UpdateDate = CType(CheckDBNull(dataReader("update_date")), Date)
+                End If
+            End While
+            dataReader.Close()
+        End If
+        connectToDB.Close()
+
+        Return bookInfo
+
+    End Function
 
     ''' <summary>
     ''' 
@@ -76,6 +113,7 @@ Public Class ManageDB
             '{book.ReviewValue}', '{book.Memo}', '{book.BuyDate}', '{book.StartReadDate}',
             '{book.EndReadDate}');"
 
+        ' ここ何をしているのか不明
         Dim imageData As Byte() = ConvertImageToByte(book.BookImage)
         Dim param As SQLiteParameter = New SQLiteParameter("@image", DbType.Binary)
         param.Value = imageData
