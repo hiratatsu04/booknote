@@ -1,9 +1,9 @@
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class BookList
     Inherits System.Windows.Forms.Form
 
     'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,10 +20,12 @@ Partial Class BookList
     'メモ: 以下のプロシージャは Windows フォーム デザイナーで必要です。
     'Windows フォーム デザイナーを使用して変更できます。  
     'コード エディターを使って変更しないでください。
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.RegisterButton = New System.Windows.Forms.Button()
-        Me.BookListBox = New System.Windows.Forms.ListBox()
+        Me.BookListView = New System.Windows.Forms.ListView()
+        Me.BookImageList = New System.Windows.Forms.ImageList(Me.components)
         Me.SuspendLayout()
         '
         'RegisterButton
@@ -36,22 +38,27 @@ Partial Class BookList
         Me.RegisterButton.Text = "登録"
         Me.RegisterButton.UseVisualStyleBackColor = True
         '
-        'BookListBox
+        'BookListView
         '
-        Me.BookListBox.FormattingEnabled = True
-        Me.BookListBox.ItemHeight = 27
-        Me.BookListBox.Location = New System.Drawing.Point(13, 70)
-        Me.BookListBox.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.BookListBox.Name = "BookListBox"
-        Me.BookListBox.Size = New System.Drawing.Size(1210, 841)
-        Me.BookListBox.TabIndex = 1
+        Me.BookListView.HideSelection = False
+        Me.BookListView.Location = New System.Drawing.Point(13, 61)
+        Me.BookListView.Name = "BookListView"
+        Me.BookListView.Size = New System.Drawing.Size(1211, 851)
+        Me.BookListView.TabIndex = 2
+        Me.BookListView.UseCompatibleStateImageBehavior = False
+        '
+        'BookImageList
+        '
+        Me.BookImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
+        Me.BookImageList.ImageSize = New System.Drawing.Size(16, 16)
+        Me.BookImageList.TransparentColor = System.Drawing.Color.Transparent
         '
         'BookList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 27.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1236, 924)
-        Me.Controls.Add(Me.BookListBox)
+        Me.Controls.Add(Me.BookListView)
         Me.Controls.Add(Me.RegisterButton)
         Me.Font = New System.Drawing.Font("游ゴシック", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -63,5 +70,6 @@ Partial Class BookList
     End Sub
 
     Friend WithEvents RegisterButton As Button
-    Friend WithEvents BookListBox As ListBox
+    Friend WithEvents BookListView As ListView
+    Friend WithEvents BookImageList As ImageList
 End Class

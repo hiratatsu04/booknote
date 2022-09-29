@@ -24,6 +24,10 @@ Public Class ManageDB
 
     End Sub
 
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <returns></returns>
     Public Function GetAllBookData() As List(Of Book)
 
         Dim bookList As New List(Of Book)
@@ -36,9 +40,7 @@ Public Class ManageDB
         ' SQLの実行結果を受け取る
         dataReader = commandDB.ExecuteReader()
         If (dataReader.HasRows) Then
-
             While (dataReader.Read())
-
                 Dim bookInfo As New Book()
 
                 bookInfo.ID = CType(dataReader("id"), Integer)
@@ -55,53 +57,39 @@ Public Class ManageDB
                 bookInfo.UpdateDate = CType(CheckDBNull(dataReader("update_date")), Date)
 
                 bookList.Add(bookInfo)
-
             End While
             dataReader.Close()
-
         End If
-
         connectToDB.Close()
 
         Return bookList
-
     End Function
 
     Public Shared Function ConvertImageToByte(image As Image) As Byte()
-
         Dim converter As New ImageConverter()
         Dim imageByte As Byte() = CType(converter.ConvertTo(image, GetType(Byte())), Byte())
         Return imageByte
-
     End Function
 
     Public Shared Function ConvertBLOBToImage(imageObject As Object) As Image
-
         Dim image As Image = Nothing
 
         ' オブジェクトの値がNULLでなければImage型へ変換する
         If Not DBNull.Value.Equals(imageObject) Then
-
             image = CType(New ImageConverter().ConvertFrom(imageObject), Image)
-
         End If
 
         Return image
-
     End Function
 
     Public Shared Function CheckDBNull(value As Object) As Object
-
         Dim returnValue As Object = Nothing
 
         If Not DBNull.Value.Equals(value) Then
-
             returnValue = value
-
         End If
 
         Return returnValue
-
     End Function
 
 End Class
