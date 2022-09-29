@@ -6,17 +6,25 @@ Public Class BookDetail
     Private book As Book
     Private id As Integer
 
-    'Sub New()
-    'End Sub
-
-    'Sub New(id As Integer)
-    'End Sub
-
     Public Overloads Sub Show(ByVal owner As IWin32Window,
                             ByVal id As Integer)
         Me.id = id
         MyBase.Show(owner)
         ShowBookData()
+
+        EditButton.Enabled = True
+        TitleTextBox.Enabled = False
+        AuthorTextBox.Enabled = False
+        RegisterImageButton.Enabled = False
+        GenreTextBox.Enabled = False
+        ReviewLabel.Enabled = False
+        ReviewTrackBar.Enabled = False
+        MemoRichTextBox.Enabled = False
+        BuyDateTextBox.Enabled = False
+        StartDateTextBox.Enabled = False
+        EndDateTextBox.Enabled = False
+        SaveButton.Enabled = False
+
     End Sub
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles ReviewTrackBar.Scroll
@@ -41,6 +49,19 @@ Public Class BookDetail
         book.EndReadDate = ConvertStringToDate(EndDateTextBox.Text)
 
         manageDB.RecodeBook(book)
+
+        EditButton.Enabled = True
+        TitleTextBox.Enabled = False
+        AuthorTextBox.Enabled = False
+        RegisterImageButton.Enabled = False
+        GenreTextBox.Enabled = False
+        ReviewLabel.Enabled = False
+        ReviewTrackBar.Enabled = False
+        MemoRichTextBox.Enabled = False
+        BuyDateTextBox.Enabled = False
+        StartDateTextBox.Enabled = False
+        EndDateTextBox.Enabled = False
+        SaveButton.Enabled = False
 
     End Sub
 
@@ -85,47 +106,6 @@ Public Class BookDetail
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-        manageDB = New ManageDB()
-        Dim book As Book = manageDB.GetOneBookData(3)
-
-        TitleTextBox.Text = book.Title
-        AuthorTextBox.Text = book.Author
-        BookImagePictureBox.Image = book.BookImage
-        GenreTextBox.Text = book.Genre
-        ReviewLabel.Text = (book.ReviewValue / 10).ToString()
-        ReviewTrackBar.Value = CType(book.ReviewValue, Integer)
-        MemoRichTextBox.Text = book.Memo
-        BuyDateTextBox.Text = book.BuyDate.ToString("yyyyMMdd")
-        StartDateTextBox.Text = book.StartReadDate.ToString("yyyyMMdd")
-        EndDateTextBox.Text = book.EndReadDate.ToString("yyyyMMdd")
-
-        id = book.ID
-
-    End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-
-        manageDB = New ManageDB()
-        book = New Book()
-
-        book.Title = TitleTextBox.Text
-        book.Author = AuthorTextBox.Text
-        book.BookImage = BookImagePictureBox.Image
-        book.Genre = GenreTextBox.Text
-        book.ReviewValue = ReviewTrackBar.Value
-        book.Memo = MemoRichTextBox.Text
-        book.BuyDate = ConvertStringToDate(BuyDateTextBox.Text)
-        book.StartReadDate = ConvertStringToDate(StartDateTextBox.Text)
-        book.EndReadDate = ConvertStringToDate(EndDateTextBox.Text)
-
-        book.ID = id
-
-        manageDB.UpdateBookData(book)
-
-    End Sub
-
     Private Sub ShowBookData()
         manageDB = New ManageDB()
         Dim book As Book = manageDB.GetOneBookData(id)
@@ -142,5 +122,20 @@ Public Class BookDetail
         EndDateTextBox.Text = book.EndReadDate.ToString("yyyyMMdd")
 
         id = book.ID
+    End Sub
+
+    Private Sub EditButton_Click(sender As Object, e As EventArgs) Handles EditButton.Click
+        TitleTextBox.Enabled = True
+        AuthorTextBox.Enabled = True
+        RegisterImageButton.Enabled = True
+        GenreTextBox.Enabled = True
+        ReviewLabel.Enabled = True
+        ReviewTrackBar.Enabled = True
+        MemoRichTextBox.Enabled = True
+        BuyDateTextBox.Enabled = True
+        StartDateTextBox.Enabled = True
+        EndDateTextBox.Enabled = True
+        SaveButton.Enabled = True
+        EditButton.Enabled = False
     End Sub
 End Class

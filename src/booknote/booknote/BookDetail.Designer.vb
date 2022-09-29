@@ -44,8 +44,7 @@ Partial Class BookDetail
         Me.Label9 = New System.Windows.Forms.Label()
         Me.StartDateTextBox = New System.Windows.Forms.TextBox()
         Me.EndDateTextBox = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.EditButton = New System.Windows.Forms.Button()
         CType(Me.ReviewTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BookImagePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -261,35 +260,24 @@ Partial Class BookDetail
         Me.EndDateTextBox.Size = New System.Drawing.Size(182, 41)
         Me.EndDateTextBox.TabIndex = 40
         '
-        'Button1
+        'EditButton
         '
-        Me.Button1.Location = New System.Drawing.Point(114, 10)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(245, 39)
-        Me.Button1.TabIndex = 41
-        Me.Button1.TabStop = False
-        Me.Button1.Text = "3を読み込み(テスト用)"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(399, 10)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(4)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(245, 39)
-        Me.Button2.TabIndex = 42
-        Me.Button2.TabStop = False
-        Me.Button2.Text = "更新(テスト用)"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.EditButton.Enabled = False
+        Me.EditButton.Location = New System.Drawing.Point(635, 10)
+        Me.EditButton.Margin = New System.Windows.Forms.Padding(4)
+        Me.EditButton.Name = "EditButton"
+        Me.EditButton.Size = New System.Drawing.Size(70, 39)
+        Me.EditButton.TabIndex = 43
+        Me.EditButton.TabStop = False
+        Me.EditButton.Text = "編集"
+        Me.EditButton.UseVisualStyleBackColor = True
         '
         'BookDetail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 27.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(796, 841)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.EditButton)
         Me.Controls.Add(Me.EndDateTextBox)
         Me.Controls.Add(Me.StartDateTextBox)
         Me.Controls.Add(Me.Label9)
@@ -315,6 +303,7 @@ Partial Class BookDetail
         Me.Font = New System.Drawing.Font("游ゴシック", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
+        Me.MaximizeBox = False
         Me.Name = "BookDetail"
         Me.Text = "BookDetail"
         CType(Me.ReviewTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
@@ -346,6 +335,5 @@ Partial Class BookDetail
     Friend WithEvents Label9 As Label
     Friend WithEvents StartDateTextBox As TextBox
     Friend WithEvents EndDateTextBox As TextBox
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents EditButton As Button
 End Class
