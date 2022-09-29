@@ -16,7 +16,12 @@ Public Class BookList
 
         ManageDB = New ManageDB()
         bookList = manageDB.GetAllBookData()
-        BookListBox.Items.Add(bookList)
+
+        For Each book As Book In bookList
+
+            BookListBox.Items.Add(book.Title)
+
+        Next
 
     End Sub
 End Class

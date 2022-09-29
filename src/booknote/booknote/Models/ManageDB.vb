@@ -26,7 +26,7 @@ Public Class ManageDB
 
     Public Function GetAllBookData() As List(Of Book)
 
-        Dim bookList As List(Of Book) = Nothing
+        Dim bookList As New List(Of Book)
 
         ConnectDB()
 
@@ -44,20 +44,15 @@ Public Class ManageDB
                 bookInfo.ID = CType(dataReader("id"), Integer)
                 bookInfo.Title = dataReader("title").ToString()
                 bookInfo.Author = dataReader("author").ToString()
-
-                Dim converter As New ImageConverter()
-                If dataReader("book_image") = Nothing Then
-                    bookInfo.BookImage = CType(converter.ConvertFrom(dataReader("book_image")), Image)
-                End If
-
+                bookInfo.BookImage = ConvertBLOBToImage(dataReader("book_image"))
                 bookInfo.Genre = dataReader("genre").ToString()
-                bookInfo.ReviewValue = CType(dataReader("review_value"), Double)
+                bookInfo.ReviewValue = CType(CheckDBNull(dataReader("review_value")), Double)
                 bookInfo.Memo = dataReader("memo").ToString()
-                bookInfo.BuyDate = CType(dataReader("buy_date"), Date)
-                bookInfo.StartReadDate = CType(dataReader("start_date"), Date)
-                bookInfo.EndReadDate = CType(dataReader("end_date"), Date)
-                bookInfo.RecodeDate = CType(dataReader("recode_date"), Date)
-                bookInfo.UpdateDate = CType(dataReader("update_date"), Date)
+                bookInfo.BuyDate = CType(CheckDBNull(dataReader("buy_date")), Date)
+                bookInfo.StartReadDate = CType(CheckDBNull(dataReader("start_date")), Date)
+                bookInfo.EndReadDate = CType(CheckDBNull(dataReader("end_date")), Date)
+                bookInfo.RecodeDate = CType(CheckDBNull(dataReader("recode_date")), Date)
+                bookInfo.UpdateDate = CType(CheckDBNull(dataReader("update_date")), Date)
 
                 bookList.Add(bookInfo)
 
@@ -69,6 +64,43 @@ Public Class ManageDB
         connectToDB.Close()
 
         Return bookList
+
+    End Function
+
+    Public Shared Function ConvertImageToByte(image As Image) As Byte()
+
+        Dim converter As New ImageConverter()
+        Dim imageByte As Byte() = CType(converter.ConvertTo(image, GetType(Byte())), Byte())
+        Return imageByte
+
+    End Function
+
+    Public Shared Function ConvertBLOBToImage(imageObject As Object) As Image
+
+        Dim image As Image = Nothing
+
+        ' オブジェクトの値がNULLでなければImage型へ変換する
+        If Not DBNull.Value.Equals(imageObject) Then
+
+            image = CType(New ImageConverter().ConvertFrom(imageObject), Image)
+
+        End If
+
+        Return image
+
+    End Function
+
+    Public Shared Function CheckDBNull(value As Object) As Object
+
+        Dim returnValue As Object = Nothing
+
+        If Not DBNull.Value.Equals(value) Then
+
+            returnValue = value
+
+        End If
+
+        Return returnValue
 
     End Function
 
