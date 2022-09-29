@@ -2,6 +2,9 @@ Option Strict On
 
 Public Class BookDetail
 
+    Dim manageDB As ManageDB
+    Dim book As Book
+
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles ReviewTrackBar.Scroll
 
         ReviewLabel.Text = (ReviewTrackBar.Value / 10).ToString("0.0")
@@ -13,6 +16,22 @@ Public Class BookDetail
     End Sub
 
     Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
+
+        manageDB = New ManageDB()
+        book = New Book()
+
+        book.Title = TitleTextBox.Text
+        book.Author = AuthorTextBox.Text
+        book.BookImage = BookImagePictureBox.Image
+        book.Genre = GenreTextBox.Text
+        book.ReviewValue = ReviewTrackBar.Value
+        book.Memo = MemoRichTextBox.Text
+        book.BuyDate = buy
+        book.StartReadDate
+        book.EndReadDate
+        book.RecodeDate
+        book.UpdateDate
+
 
     End Sub
 

@@ -32,8 +32,7 @@ Public Class ManageDB
 
         Dim bookList As New List(Of Book)
 
-        ConnectDB()
-
+        ConnectDB()   ' データベースへ接続
         commandDB.Connection = connectToDB
         commandDB.CommandText = "SELECT * FROM books;"
 
@@ -64,6 +63,27 @@ Public Class ManageDB
 
         Return bookList
     End Function
+
+    Public Sub RecodeBook(book As Book)
+
+        ConnectDB()   ' データベースへ接続
+        commandDB.Connection = connectToDB
+
+        commandDB.CommandText =
+            $"INSERT INTO books(title, author, book_image, genre, review_value,
+            memo, buy_date, start_date, end_date, recode_date, update_date )
+            VALUES('{book.Title}', '{book.Author}', @image, '{book.Genre}',
+            '{book.ReviewValue}', '{book.Memo}', '{book.BuyDate}', '{book.StartReadDate}',
+            '{book.EndReadDate}', '{book.RecodeDate}', '{book.UpdateDate}');"
+
+        Dim imageData As Byte() = ConvertImageToByte(book.BookImage)
+        Dim param As SQLiteParameter = New SQLiteParameter("@image", DbType.Binary)
+        param.Value = imageData
+        commandDB.Parameters.Add(param)
+        commandDB.ExecuteNonQuery()
+
+        connectToDB.Close()
+    End Sub
 
     Public Shared Function ConvertImageToByte(image As Image) As Byte()
         Dim converter As New ImageConverter()
