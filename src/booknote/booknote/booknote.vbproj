@@ -73,6 +73,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Book.vb" />
     <Compile Include="BookDetail.Designer.vb">
       <DependentUpon>BookDetail.vb</DependentUpon>
     </Compile>
