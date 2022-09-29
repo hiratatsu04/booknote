@@ -72,4 +72,40 @@ Public Class BookList
         Return canvas
     End Function
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        manageDB = New ManageDB()
+        ' 登録してある本の全件を取得
+        bookList = manageDB.GetAllBookData()
+
+        ' サムネイル画像のサイズを設定
+        Dim width As Integer = 250
+        Dim height As Integer = 200
+
+        BookImageList.ImageSize = New Size(width, height)
+        BookListView.LargeImageList = BookImageList
+
+        ' サムネイルに表示する本のタイトルをリストで持っておく
+        Dim bookTitle As New List(Of String)
+
+        For Each book As Book In bookList
+
+            bookTitle.Add(book.Title)
+
+            ' 本のサムネイル画像がなければ、Noimageを適応する
+            If book.BookImage Is Nothing Then
+                Dim filePath As String = System.Environment.CurrentDirectory + "\image\noimage.png"
+                Dim noImage As Image = Bitmap.FromFile(filePath)
+                Dim thumbnail As Image = createThumbnail(noImage, width, height)
+                BookImageList.Images.Add(thumbnail)
+            Else
+                BookImageList.Images.Add(book.BookImage)
+            End If
+
+        Next
+
+        ' ListViewへサムネイル画像と本のタイトルを表示する
+        For i As Integer = 0 To (BookImageList.Images.Count - 1)
+            BookListView.Items.Add(bookTitle(i), i)
+        Next
+    End Sub
 End Class

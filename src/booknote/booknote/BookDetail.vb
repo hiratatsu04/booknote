@@ -11,13 +11,6 @@ Public Class BookDetail
 
     End Sub
 
-<<<<<<< HEAD
-    Private Sub BookDetail_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
-=======
->>>>>>> 0cb0d37996d561943806b656063c0cc7c294834e
     Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
 
         manageDB = New ManageDB()
@@ -29,12 +22,11 @@ Public Class BookDetail
         book.Genre = GenreTextBox.Text
         book.ReviewValue = ReviewTrackBar.Value
         book.Memo = MemoRichTextBox.Text
-        book.BuyDate = buy
-        book.StartReadDate
-        book.EndReadDate
-        book.RecodeDate
-        book.UpdateDate
+        book.BuyDate = ConvertStringToDate(BuyDateTextBox.Text)
+        book.StartReadDate = ConvertStringToDate(StartDateTextBox.Text)
+        book.EndReadDate = ConvertStringToDate(EndDateTextBox.Text)
 
+        manageDB.RecodeBook(book)
 
     End Sub
 
@@ -59,23 +51,23 @@ Public Class BookDetail
 
     End Sub
 
-    Private Sub BuyDateTextBox_Leave(sender As Object, e As EventArgs) Handles BuyDateTextBox.Leave
+    Private Function ConvertStringToDate(str As String) As Date
 
-        Dim buyDate As Date
+        Dim convertedDate As Date = Nothing
 
-        'Dim buyDateString As String = BuyDateTextBox.Text.Insert(6, "/"c).Insert(4, "/"c)
-        'If Not DateTime.TryParse(buyDateString, buyDate) Then
-        '    MessageBox.Show($"{BuyDateTextBox.Text}の値をDate型に変換できません。")
-        '    BuyDateTextBox.Text = String.Empty
-        '    BuyDateTextBox.Focus()
-        'End If
+        If Not DateTime.TryParseExact(str, "yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo, System.Globalization.DateTimeStyles.None, convertedDate) Then
 
-        If Not DateTime.TryParseExact(BuyDateTextBox.Text, "yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo, System.Globalization.DateTimeStyles.None, buyDate) Then
-
-            MessageBox.Show($"{BuyDateTextBox.Text}の値をDate型に変換できません。")
-            BuyDateTextBox.Text = String.Empty
+            MessageBox.Show($"{str}の値をDate型に変換できません。")
 
         End If
+
+        Return convertedDate
+
+    End Function
+
+    Private Sub ReturnButton_Click(sender As Object, e As EventArgs) Handles ReturnButton.Click
+
+        Me.Close()
 
     End Sub
 End Class

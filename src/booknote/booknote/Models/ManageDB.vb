@@ -71,10 +71,10 @@ Public Class ManageDB
 
         commandDB.CommandText =
             $"INSERT INTO books(title, author, book_image, genre, review_value,
-            memo, buy_date, start_date, end_date, recode_date, update_date )
+            memo, buy_date, start_date, end_date )
             VALUES('{book.Title}', '{book.Author}', @image, '{book.Genre}',
             '{book.ReviewValue}', '{book.Memo}', '{book.BuyDate}', '{book.StartReadDate}',
-            '{book.EndReadDate}', '{book.RecodeDate}', '{book.UpdateDate}');"
+            '{book.EndReadDate}');"
 
         Dim imageData As Byte() = ConvertImageToByte(book.BookImage)
         Dim param As SQLiteParameter = New SQLiteParameter("@image", DbType.Binary)
