@@ -17,18 +17,12 @@ Public Class ManageDB
     ''' </summary>
     Private Sub ConnectDB()
 
-        Try
-            connectToDB = New SQLiteConnection()
-            commandDB = New SQLiteCommand()
-            dataReader = Nothing
+        connectToDB = New SQLiteConnection()
+        commandDB = New SQLiteCommand()
+        dataReader = Nothing
 
-            connectToDB.ConnectionString = "Data Source=" + dbPath
-            connectToDB.Open()
-        Catch ex As Exception
-            Console.WriteLine(ex.Message)
-        Finally
-            connectToDB.Close()
-        End Try
+        connectToDB.ConnectionString = "Data Source=" + dbPath
+        connectToDB.Open()
 
     End Sub
 
@@ -98,11 +92,11 @@ Public Class ManageDB
                     bookInfo.RecodeDate = CType(CheckDBNull(dataReader("recode_date")), Date)
                     bookInfo.UpdateDate = CType(CheckDBNull(dataReader("update_date")), Date)
                 End While
+                dataReader.Close()
             End If
         Catch ex As Exception
             Console.WriteLine(ex.Message)
         Finally
-            dataReader.Close()
             connectToDB.Close()
         End Try
 
@@ -144,11 +138,11 @@ Public Class ManageDB
 
                     bookList.Add(bookInfo)
                 End While
+                dataReader.Close()
             End If
         Catch ex As Exception
             Console.WriteLine(ex.Message)
         Finally
-            dataReader.Close()
             connectToDB.Close()
         End Try
 
@@ -196,9 +190,15 @@ Public Class ManageDB
     ''' <param name="image"></param>
     ''' <returns></returns>
     Public Shared Function ConvertImageToByte(image As Image) As Byte()
-        Dim converter As New ImageConverter()
-        Dim imageByte As Byte() = CType(converter.ConvertTo(image, GetType(Byte())), Byte())
-        Return imageByte
+
+        If image IsNot Nothing Then
+            Dim converter As New ImageConverter()
+            Dim imageByte As Byte() = CType(converter.ConvertTo(image, GetType(Byte())), Byte())
+            Return imageByte
+        End If
+
+        Dim returnData As Byte() = Nothing
+        Return returnData
     End Function
 
     ''' <summary>
