@@ -17,12 +17,18 @@ Public Class ManageDB
     ''' </summary>
     Private Sub ConnectDB()
 
-        connectToDB = New SQLiteConnection()
-        commandDB = New SQLiteCommand()
-        dataReader = Nothing
+        Try
+            connectToDB = New SQLiteConnection()
+            commandDB = New SQLiteCommand()
+            dataReader = Nothing
 
-        connectToDB.ConnectionString = "Data Source=" + dbPath
-        connectToDB.Open()
+            connectToDB.ConnectionString = "Data Source=" + dbPath
+            connectToDB.Open()
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        Finally
+            connectToDB.Close()
+        End Try
 
     End Sub
 
@@ -32,26 +38,30 @@ Public Class ManageDB
     ''' <param name="book"></param>
     Public Sub UpdateBookData(book As Book)
 
-        ConnectDB()   ' データベースへ接続
-        commandDB.Connection = connectToDB
+        Try
+            ConnectDB()   ' データベースへ接続
+            commandDB.Connection = connectToDB
 
-        commandDB.CommandText =
-            $"UPDATE books SET title = @title, author = @author, book_image = @book_image,
+            commandDB.CommandText =
+                $"UPDATE books SET title = @title, author = @author, book_image = @book_image,
             genre = @genre, review_value = @review_value, memo = @memo, buy_date = @buy_date, start_date = @start_date, end_date = @end_date, update_date = '{System.DateTime.Now}' WHERE id = {book.ID};"
 
-        AddSqlParameter(commandDB, "@title", DbType.String, book.Title)
-        AddSqlParameter(commandDB, "@author", DbType.String, book.Author)
-        AddSqlParameter(commandDB, "@book_image", DbType.Binary, ConvertImageToByte(book.BookImage))
-        AddSqlParameter(commandDB, "@genre", DbType.String, book.Genre)
-        AddSqlParameter(commandDB, "@review_value", DbType.String, book.ReviewValue)
-        AddSqlParameter(commandDB, "@memo", DbType.String, book.Memo)
-        AddSqlParameter(commandDB, "@buy_date", DbType.String, book.BuyDate)
-        AddSqlParameter(commandDB, "@start_date", DbType.String, book.StartReadDate)
-        AddSqlParameter(commandDB, "@end_date", DbType.String, book.EndReadDate)
+            AddSqlParameter(commandDB, "@title", DbType.String, book.Title)
+            AddSqlParameter(commandDB, "@author", DbType.String, book.Author)
+            AddSqlParameter(commandDB, "@book_image", DbType.Binary, ConvertImageToByte(book.BookImage))
+            AddSqlParameter(commandDB, "@genre", DbType.String, book.Genre)
+            AddSqlParameter(commandDB, "@review_value", DbType.String, book.ReviewValue)
+            AddSqlParameter(commandDB, "@memo", DbType.String, book.Memo)
+            AddSqlParameter(commandDB, "@buy_date", DbType.String, book.BuyDate)
+            AddSqlParameter(commandDB, "@start_date", DbType.String, book.StartReadDate)
+            AddSqlParameter(commandDB, "@end_date", DbType.String, book.EndReadDate)
 
-        commandDB.ExecuteNonQuery()
-
-        connectToDB.Close()
+            commandDB.ExecuteNonQuery()
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        Finally
+            connectToDB.Close()
+        End Try
 
     End Sub
 
@@ -64,32 +74,37 @@ Public Class ManageDB
 
         Dim bookInfo As New Book()
 
-        ConnectDB()   ' データベースへ接続
-        commandDB.Connection = connectToDB
-        commandDB.CommandText = $"SELECT * FROM books WHERE id={id};"
+        Try
+            ConnectDB()   ' データベースへ接続
+            commandDB.Connection = connectToDB
+            commandDB.CommandText = $"SELECT * FROM books WHERE id={id};"
 
-        ' SQLの実行結果を受け取る
-        dataReader = commandDB.ExecuteReader()
+            ' SQLの実行結果を受け取る
+            dataReader = commandDB.ExecuteReader()
 
-        ' idと一致するデータをプロパティに設定
-        If (dataReader.HasRows) Then
-            While (dataReader.Read())
-                bookInfo.ID = CType(dataReader("id"), Integer)
-                bookInfo.Title = dataReader("title").ToString()
-                bookInfo.Author = dataReader("author").ToString()
-                bookInfo.BookImage = ConvertBLOBToImage(dataReader("book_image"))
-                bookInfo.Genre = dataReader("genre").ToString()
-                bookInfo.ReviewValue = CType(CheckDBNull(dataReader("review_value")), Double)
-                bookInfo.Memo = dataReader("memo").ToString()
-                bookInfo.BuyDate = CType(CheckDBNull(dataReader("buy_date")), Date)
-                bookInfo.StartReadDate = CType(CheckDBNull(dataReader("start_date")), Date)
-                bookInfo.EndReadDate = CType(CheckDBNull(dataReader("end_date")), Date)
-                bookInfo.RecodeDate = CType(CheckDBNull(dataReader("recode_date")), Date)
-                bookInfo.UpdateDate = CType(CheckDBNull(dataReader("update_date")), Date)
-            End While
+            ' idと一致するデータをプロパティに設定
+            If (dataReader.HasRows) Then
+                While (dataReader.Read())
+                    bookInfo.ID = CType(dataReader("id"), Integer)
+                    bookInfo.Title = dataReader("title").ToString()
+                    bookInfo.Author = dataReader("author").ToString()
+                    bookInfo.BookImage = ConvertBLOBToImage(dataReader("book_image"))
+                    bookInfo.Genre = dataReader("genre").ToString()
+                    bookInfo.ReviewValue = CType(CheckDBNull(dataReader("review_value")), Double)
+                    bookInfo.Memo = dataReader("memo").ToString()
+                    bookInfo.BuyDate = CType(CheckDBNull(dataReader("buy_date")), Date)
+                    bookInfo.StartReadDate = CType(CheckDBNull(dataReader("start_date")), Date)
+                    bookInfo.EndReadDate = CType(CheckDBNull(dataReader("end_date")), Date)
+                    bookInfo.RecodeDate = CType(CheckDBNull(dataReader("recode_date")), Date)
+                    bookInfo.UpdateDate = CType(CheckDBNull(dataReader("update_date")), Date)
+                End While
+            End If
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        Finally
             dataReader.Close()
-        End If
-        connectToDB.Close()
+            connectToDB.Close()
+        End Try
 
         Return bookInfo
 
@@ -103,34 +118,39 @@ Public Class ManageDB
 
         Dim bookList As New List(Of Book)
 
-        ConnectDB()   ' データベースへ接続
-        commandDB.Connection = connectToDB
-        commandDB.CommandText = "SELECT * FROM books;"
+        Try
+            ConnectDB()   ' データベースへ接続
+            commandDB.Connection = connectToDB
+            commandDB.CommandText = "SELECT * FROM books;"
 
-        ' SQLの実行結果を受け取る
-        dataReader = commandDB.ExecuteReader()
-        If (dataReader.HasRows) Then
-            While (dataReader.Read())
-                Dim bookInfo As New Book()
+            ' SQLの実行結果を受け取る
+            dataReader = commandDB.ExecuteReader()
+            If (dataReader.HasRows) Then
+                While (dataReader.Read())
+                    Dim bookInfo As New Book()
 
-                bookInfo.ID = CType(dataReader("id"), Integer)
-                bookInfo.Title = dataReader("title").ToString()
-                bookInfo.Author = dataReader("author").ToString()
-                bookInfo.BookImage = ConvertBLOBToImage(dataReader("book_image"))
-                bookInfo.Genre = dataReader("genre").ToString()
-                bookInfo.ReviewValue = CType(CheckDBNull(dataReader("review_value")), Double)
-                bookInfo.Memo = dataReader("memo").ToString()
-                bookInfo.BuyDate = CType(CheckDBNull(dataReader("buy_date")), Date)
-                bookInfo.StartReadDate = CType(CheckDBNull(dataReader("start_date")), Date)
-                bookInfo.EndReadDate = CType(CheckDBNull(dataReader("end_date")), Date)
-                bookInfo.RecodeDate = CType(CheckDBNull(dataReader("recode_date")), Date)
-                bookInfo.UpdateDate = CType(CheckDBNull(dataReader("update_date")), Date)
+                    bookInfo.ID = CType(dataReader("id"), Integer)
+                    bookInfo.Title = dataReader("title").ToString()
+                    bookInfo.Author = dataReader("author").ToString()
+                    bookInfo.BookImage = ConvertBLOBToImage(dataReader("book_image"))
+                    bookInfo.Genre = dataReader("genre").ToString()
+                    bookInfo.ReviewValue = CType(CheckDBNull(dataReader("review_value")), Double)
+                    bookInfo.Memo = dataReader("memo").ToString()
+                    bookInfo.BuyDate = CType(CheckDBNull(dataReader("buy_date")), Date)
+                    bookInfo.StartReadDate = CType(CheckDBNull(dataReader("start_date")), Date)
+                    bookInfo.EndReadDate = CType(CheckDBNull(dataReader("end_date")), Date)
+                    bookInfo.RecodeDate = CType(CheckDBNull(dataReader("recode_date")), Date)
+                    bookInfo.UpdateDate = CType(CheckDBNull(dataReader("update_date")), Date)
 
-                bookList.Add(bookInfo)
-            End While
+                    bookList.Add(bookInfo)
+                End While
+            End If
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        Finally
             dataReader.Close()
-        End If
-        connectToDB.Close()
+            connectToDB.Close()
+        End Try
 
         Return bookList
     End Function
@@ -141,29 +161,33 @@ Public Class ManageDB
     ''' <param name="book"></param>
     Public Sub RecodeBook(book As Book)
 
-        ConnectDB()   ' データベースへ接続
-        commandDB.Connection = connectToDB
+        Try
+            ConnectDB()   ' データベースへ接続
+            commandDB.Connection = connectToDB
 
-        commandDB.CommandText =
-            $"INSERT INTO books(title, author, book_image, genre, review_value,
+            commandDB.CommandText =
+                $"INSERT INTO books(title, author, book_image, genre, review_value,
             memo, buy_date, start_date, end_date )
             VALUES(@title, @author, @book_image, @genre,
             @review_value, @memo, @buy_date, @start_date,
             @end_date);"
 
-        AddSqlParameter(commandDB, "@title", DbType.String, book.Title)
-        AddSqlParameter(commandDB, "@author", DbType.String, book.Author)
-        AddSqlParameter(commandDB, "@book_image", DbType.Binary, ConvertImageToByte(book.BookImage))
-        AddSqlParameter(commandDB, "@genre", DbType.String, book.Genre)
-        AddSqlParameter(commandDB, "@review_value", DbType.String, book.ReviewValue)
-        AddSqlParameter(commandDB, "@memo", DbType.String, book.Memo)
-        AddSqlParameter(commandDB, "@buy_date", DbType.String, book.BuyDate)
-        AddSqlParameter(commandDB, "@start_date", DbType.String, book.StartReadDate)
-        AddSqlParameter(commandDB, "@end_date", DbType.String, book.EndReadDate)
+            AddSqlParameter(commandDB, "@title", DbType.String, book.Title)
+            AddSqlParameter(commandDB, "@author", DbType.String, book.Author)
+            AddSqlParameter(commandDB, "@book_image", DbType.Binary, ConvertImageToByte(book.BookImage))
+            AddSqlParameter(commandDB, "@genre", DbType.String, book.Genre)
+            AddSqlParameter(commandDB, "@review_value", DbType.String, book.ReviewValue)
+            AddSqlParameter(commandDB, "@memo", DbType.String, book.Memo)
+            AddSqlParameter(commandDB, "@buy_date", DbType.String, book.BuyDate)
+            AddSqlParameter(commandDB, "@start_date", DbType.String, book.StartReadDate)
+            AddSqlParameter(commandDB, "@end_date", DbType.String, book.EndReadDate)
 
-        commandDB.ExecuteNonQuery()
-
-        connectToDB.Close()
+            commandDB.ExecuteNonQuery()
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        Finally
+            connectToDB.Close()
+        End Try
     End Sub
 
     ''' <summary>
