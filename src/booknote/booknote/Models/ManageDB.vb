@@ -36,19 +36,19 @@ Public Class ManageDB
         commandDB.Connection = connectToDB
 
         commandDB.CommandText =
-            $"UPDATE books SET title = '{book.Title}',
-            author = '{book.Author}', book_image = @image,
-            genre = '{book.Genre}', review_value = '{book.ReviewValue}',
-            memo = '{book.Memo}', buy_date = '{book.BuyDate}',
-            start_date = '{book.StartReadDate}', end_date = '{book.EndReadDate}',
-            update_date = '{System.DateTime.Now}'
-            WHERE id = {book.ID};"
+            $"UPDATE books SET title = @title, author = @author, book_image = @book_image,
+            genre = @genre, review_value = @review_value, memo = @memo, buy_date = @buy_date, start_date = @start_date, end_date = @end_date, update_date = '{System.DateTime.Now}' WHERE id = {book.ID};"
 
-        ' ここ何をしているのか不明
-        Dim imageData As Byte() = ConvertImageToByte(book.BookImage)
-        Dim param As SQLiteParameter = New SQLiteParameter("@image", DbType.Binary)
-        param.Value = imageData
-        commandDB.Parameters.Add(param)
+        AddSqlParameter(commandDB, "@title", DbType.String, book.Title)
+        AddSqlParameter(commandDB, "@author", DbType.String, book.Author)
+        AddSqlParameter(commandDB, "@book_image", DbType.Binary, ConvertImageToByte(book.BookImage))
+        AddSqlParameter(commandDB, "@genre", DbType.String, book.Genre)
+        AddSqlParameter(commandDB, "@review_value", DbType.String, book.ReviewValue)
+        AddSqlParameter(commandDB, "@memo", DbType.String, book.Memo)
+        AddSqlParameter(commandDB, "@buy_date", DbType.String, book.BuyDate)
+        AddSqlParameter(commandDB, "@start_date", DbType.String, book.StartReadDate)
+        AddSqlParameter(commandDB, "@end_date", DbType.String, book.EndReadDate)
+
         commandDB.ExecuteNonQuery()
 
         connectToDB.Close()
@@ -147,15 +147,20 @@ Public Class ManageDB
         commandDB.CommandText =
             $"INSERT INTO books(title, author, book_image, genre, review_value,
             memo, buy_date, start_date, end_date )
-            VALUES('{book.Title}', '{book.Author}', @image, '{book.Genre}',
-            '{book.ReviewValue}', '{book.Memo}', '{book.BuyDate}', '{book.StartReadDate}',
-            '{book.EndReadDate}');"
+            VALUES(@title, @author, @book_image, @genre,
+            @review_value, @memo, @buy_date, @start_date,
+            @end_date);"
 
-        ' ここ何をしているのか不明
-        Dim imageData As Byte() = ConvertImageToByte(book.BookImage)
-        Dim param As SQLiteParameter = New SQLiteParameter("@image", DbType.Binary)
-        param.Value = imageData
-        commandDB.Parameters.Add(param)
+        AddSqlParameter(commandDB, "@title", DbType.String, book.Title)
+        AddSqlParameter(commandDB, "@author", DbType.String, book.Author)
+        AddSqlParameter(commandDB, "@book_image", DbType.Binary, ConvertImageToByte(book.BookImage))
+        AddSqlParameter(commandDB, "@genre", DbType.String, book.Genre)
+        AddSqlParameter(commandDB, "@review_value", DbType.String, book.ReviewValue)
+        AddSqlParameter(commandDB, "@memo", DbType.String, book.Memo)
+        AddSqlParameter(commandDB, "@buy_date", DbType.String, book.BuyDate)
+        AddSqlParameter(commandDB, "@start_date", DbType.String, book.StartReadDate)
+        AddSqlParameter(commandDB, "@end_date", DbType.String, book.EndReadDate)
+
         commandDB.ExecuteNonQuery()
 
         connectToDB.Close()
@@ -204,5 +209,23 @@ Public Class ManageDB
 
         Return returnValue
     End Function
+
+    ''' <summary>
+    ''' @で始まるパラメータに対して、プレースホルダー処理を行い、ByRefでSQLiteCommandに追加する
+    ''' </summary>
+    ''' <param name="command"></param>
+    ''' <param name="parameterName"></param>
+    ''' <param name="type"></param>
+    ''' <param name="value"></param>
+    Public Shared Sub AddSqlParameter(ByRef command As SQLiteCommand, parameterName As String, type As DbType, value As Object)
+
+        Dim param As SQLiteParameter = command.CreateParameter()
+        param.ParameterName = parameterName
+        param.DbType = type
+        param.Direction = ParameterDirection.Input
+        param.Value = value
+        command.Parameters.Add(param)
+
+    End Sub
 
 End Class
