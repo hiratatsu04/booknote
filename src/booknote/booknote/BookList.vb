@@ -4,10 +4,14 @@ Public Class BookList
 
     ' 一覧表示のためのリスト型変数
     Private bookList As List(Of Book)
-    ' サーバー操作のための変数
+    ' データベース操作のための変数
     Private manageDB As ManageDB
 
-    ' 登録ボタン押下でBookDetailフォームを開く。Showにbookを引数として指定せず、新規登録画面として開く。
+    ''' <summary>
+    ''' 登録ボタン押下でBookDetailフォームを開く。Showにbookを引数として指定せず、新規登録画面として開く。
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub BtnRegister_Click(sender As Object, e As EventArgs) Handles RegisterButton.Click
 
         Dim f As New BookDetail()
@@ -15,9 +19,11 @@ Public Class BookList
 
     End Sub
 
-    ' フォーム読み込み時の初期設定
-    ' データベースから本全件取得し表示する
-    ' BookListViewの設定も行っている（HoverSelectionとActivationの設定）
+    ''' <summary>
+    ''' フォーム読み込み時の初期設定。ータベースから本全件取得し表示する。BookListViewの設定も行っている（HoverSelectionとActivationの設定）
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub BookList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         manageDB = New ManageDB()

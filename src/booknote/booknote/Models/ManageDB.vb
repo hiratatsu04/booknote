@@ -12,8 +12,10 @@ Public Class ManageDB
     ' データベースの保管場所
     Private dbPath As String = System.Environment.CurrentDirectory + "\database\books.db"
 
-    ' データベースへ接続
-    Public Sub ConnectDB()
+    ''' <summary>
+    ''' データベースへ接続
+    ''' </summary>
+    Private Sub ConnectDB()
 
         connectToDB = New SQLiteConnection()
         commandDB = New SQLiteCommand()
@@ -28,7 +30,7 @@ Public Class ManageDB
     ''' データベースの値を引数bookに更新する。
     ''' </summary>
     ''' <param name="book"></param>
-    Private Sub UpdateBookData(book As Book)
+    Public Sub UpdateBookData(book As Book)
 
         ConnectDB()   ' データベースへ接続
         commandDB.Connection = connectToDB
