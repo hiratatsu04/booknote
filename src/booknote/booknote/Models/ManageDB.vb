@@ -209,8 +209,11 @@ Public Class ManageDB
 
             ' 書籍データが無ければNoImage画像を保存する
             If book.BookImage Is Nothing Then
-                Dim filePath As String = System.Environment.CurrentDirectory + "\image\noimage.png"
-                Dim noImage As Image = Bitmap.FromFile(filePath)
+                '現在のコードを実行しているAssemblyを取得
+                Dim myAssembly As System.Reflection.Assembly = System.Reflection.Assembly.GetExecutingAssembly()
+                '指定されたマニフェストリソースを読み込む
+                Dim noImage As Image = New Bitmap(myAssembly.GetManifestResourceStream("booknote.noimage.png"))
+
                 AddSqlParameter(commandDB, "@book_image", DbType.Binary, ConvertImageToByte(noImage))
             Else
                 AddSqlParameter(commandDB, "@book_image", DbType.Binary, ConvertImageToByte(book.BookImage))

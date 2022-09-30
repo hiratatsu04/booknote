@@ -155,7 +155,7 @@ Public Class BookDetail
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    Private Sub ReturnButton_Click(sender As Object, e As EventArgs) Handles ReturnButton.Click
+    Private Sub ReturnButton_Click(sender As Object, e As EventArgs)
 
         ' 一覧表示フォームにOKを渡す
         Me.DialogResult = DialogResult.OK

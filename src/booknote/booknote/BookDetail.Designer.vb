@@ -22,7 +22,6 @@ Partial Class BookDetail
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ReturnButton = New System.Windows.Forms.Button()
         Me.SaveButton = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -50,17 +49,6 @@ Partial Class BookDetail
         CType(Me.ReviewTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BookImagePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'ReturnButton
-        '
-        Me.ReturnButton.Location = New System.Drawing.Point(11, 10)
-        Me.ReturnButton.Margin = New System.Windows.Forms.Padding(4)
-        Me.ReturnButton.Name = "ReturnButton"
-        Me.ReturnButton.Size = New System.Drawing.Size(67, 39)
-        Me.ReturnButton.TabIndex = 10
-        Me.ReturnButton.TabStop = False
-        Me.ReturnButton.Text = "戻る"
-        Me.ReturnButton.UseVisualStyleBackColor = True
         '
         'SaveButton
         '
@@ -268,7 +256,7 @@ Partial Class BookDetail
         'RecodeDateLabel
         '
         Me.RecodeDateLabel.AutoSize = True
-        Me.RecodeDateLabel.Location = New System.Drawing.Point(122, 16)
+        Me.RecodeDateLabel.Location = New System.Drawing.Point(13, 16)
         Me.RecodeDateLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.RecodeDateLabel.Name = "RecodeDateLabel"
         Me.RecodeDateLabel.Size = New System.Drawing.Size(0, 27)
@@ -286,7 +274,7 @@ Partial Class BookDetail
         'UpdateDateLabel
         '
         Me.UpdateDateLabel.AutoSize = True
-        Me.UpdateDateLabel.Location = New System.Drawing.Point(325, 16)
+        Me.UpdateDateLabel.Location = New System.Drawing.Point(210, 16)
         Me.UpdateDateLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.UpdateDateLabel.Name = "UpdateDateLabel"
         Me.UpdateDateLabel.Size = New System.Drawing.Size(0, 27)
@@ -321,7 +309,6 @@ Partial Class BookDetail
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BookImagePictureBox)
         Me.Controls.Add(Me.SaveButton)
-        Me.Controls.Add(Me.ReturnButton)
         Me.Font = New System.Drawing.Font("游ゴシック", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
@@ -334,8 +321,6 @@ Partial Class BookDetail
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ReturnButton As Button
     Friend WithEvents SaveButton As Button
     Friend WithEvents BookImagePictureBox As PictureBox
     Friend WithEvents Label1 As Label
