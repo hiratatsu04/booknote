@@ -155,6 +155,12 @@ Public Class BookDetail
         BuyDateTextBox.Text = Me.book.BuyDate.ToString("yyyyMMdd")
         StartDateTextBox.Text = Me.book.StartReadDate.ToString("yyyyMMdd")
         EndDateTextBox.Text = Me.book.EndReadDate.ToString("yyyyMMdd")
+        RecodeDateLabel.Text = "登録日：" & Me.book.RecodeDate.ToString("yyyyMMdd")
+        If Not Me.book.UpdateDate = #1/1/0001 12:00:00 AM# Then
+            UpdateDateLabel.Text = "更新日：" & Me.book.UpdateDate.ToString("yyyyMMdd")
+        Else
+            UpdateDateLabel.Text = "更新日："
+        End If
 
     End Sub
 

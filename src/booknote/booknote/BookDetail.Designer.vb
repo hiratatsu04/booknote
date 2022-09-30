@@ -31,7 +31,6 @@ Partial Class BookDetail
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.MemoRichTextBox = New System.Windows.Forms.RichTextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.TitleTextBox = New System.Windows.Forms.TextBox()
         Me.AuthorTextBox = New System.Windows.Forms.TextBox()
@@ -45,6 +44,9 @@ Partial Class BookDetail
         Me.StartDateTextBox = New System.Windows.Forms.TextBox()
         Me.EndDateTextBox = New System.Windows.Forms.TextBox()
         Me.EditButton = New System.Windows.Forms.Button()
+        Me.RecodeDateLabel = New System.Windows.Forms.Label()
+        Me.MemoRichTextBox = New System.Windows.Forms.RichTextBox()
+        Me.UpdateDateLabel = New System.Windows.Forms.Label()
         CType(Me.ReviewTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BookImagePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -140,15 +142,6 @@ Partial Class BookDetail
         Me.Label7.Size = New System.Drawing.Size(138, 27)
         Me.Label7.TabIndex = 9
         Me.Label7.Text = "読書終了日："
-        '
-        'MemoRichTextBox
-        '
-        Me.MemoRichTextBox.Location = New System.Drawing.Point(11, 493)
-        Me.MemoRichTextBox.Margin = New System.Windows.Forms.Padding(4)
-        Me.MemoRichTextBox.Name = "MemoRichTextBox"
-        Me.MemoRichTextBox.Size = New System.Drawing.Size(772, 335)
-        Me.MemoRichTextBox.TabIndex = 7
-        Me.MemoRichTextBox.Text = ""
         '
         'Label8
         '
@@ -272,11 +265,40 @@ Partial Class BookDetail
         Me.EditButton.Text = "編集"
         Me.EditButton.UseVisualStyleBackColor = True
         '
+        'RecodeDateLabel
+        '
+        Me.RecodeDateLabel.AutoSize = True
+        Me.RecodeDateLabel.Location = New System.Drawing.Point(122, 16)
+        Me.RecodeDateLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.RecodeDateLabel.Name = "RecodeDateLabel"
+        Me.RecodeDateLabel.Size = New System.Drawing.Size(0, 27)
+        Me.RecodeDateLabel.TabIndex = 44
+        '
+        'MemoRichTextBox
+        '
+        Me.MemoRichTextBox.Location = New System.Drawing.Point(11, 493)
+        Me.MemoRichTextBox.Margin = New System.Windows.Forms.Padding(4)
+        Me.MemoRichTextBox.Name = "MemoRichTextBox"
+        Me.MemoRichTextBox.Size = New System.Drawing.Size(772, 335)
+        Me.MemoRichTextBox.TabIndex = 7
+        Me.MemoRichTextBox.Text = ""
+        '
+        'UpdateDateLabel
+        '
+        Me.UpdateDateLabel.AutoSize = True
+        Me.UpdateDateLabel.Location = New System.Drawing.Point(325, 16)
+        Me.UpdateDateLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.UpdateDateLabel.Name = "UpdateDateLabel"
+        Me.UpdateDateLabel.Size = New System.Drawing.Size(0, 27)
+        Me.UpdateDateLabel.TabIndex = 45
+        '
         'BookDetail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 27.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(796, 841)
+        Me.Controls.Add(Me.UpdateDateLabel)
+        Me.Controls.Add(Me.RecodeDateLabel)
         Me.Controls.Add(Me.EditButton)
         Me.Controls.Add(Me.EndDateTextBox)
         Me.Controls.Add(Me.StartDateTextBox)
@@ -323,7 +345,6 @@ Partial Class BookDetail
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
-    Friend WithEvents MemoRichTextBox As RichTextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents TitleTextBox As TextBox
     Friend WithEvents AuthorTextBox As TextBox
@@ -336,4 +357,7 @@ Partial Class BookDetail
     Friend WithEvents StartDateTextBox As TextBox
     Friend WithEvents EndDateTextBox As TextBox
     Friend WithEvents EditButton As Button
+    Friend WithEvents RecodeDateLabel As Label
+    Friend WithEvents MemoRichTextBox As RichTextBox
+    Friend WithEvents UpdateDateLabel As Label
 End Class
