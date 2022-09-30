@@ -58,36 +58,34 @@ Public Class ManageDB
     ''' <summary>
     ''' 引数IDに該当するデータをデータベースから取得する
     ''' </summary>
-    ''' <param name="ID"></param>
+    ''' <param name="id"></param>
     ''' <returns></returns>
-    Public Function GetOneBookData(ID As Integer) As Book
+    Public Function GetOneBookData(id As Integer) As Book
 
         Dim bookInfo As New Book()
 
         ConnectDB()   ' データベースへ接続
         commandDB.Connection = connectToDB
-        commandDB.CommandText = "SELECT * FROM books;"
+        commandDB.CommandText = $"SELECT * FROM books WHERE id={id};"
 
         ' SQLの実行結果を受け取る
         dataReader = commandDB.ExecuteReader()
 
-        ' IDと一致するデータをプロパティに設定
+        ' idと一致するデータをプロパティに設定
         If (dataReader.HasRows) Then
             While (dataReader.Read())
-                If CType(dataReader("id"), Integer) = ID Then
-                    bookInfo.ID = CType(dataReader("id"), Integer)
-                    bookInfo.Title = dataReader("title").ToString()
-                    bookInfo.Author = dataReader("author").ToString()
-                    bookInfo.BookImage = ConvertBLOBToImage(dataReader("book_image"))
-                    bookInfo.Genre = dataReader("genre").ToString()
-                    bookInfo.ReviewValue = CType(CheckDBNull(dataReader("review_value")), Double)
-                    bookInfo.Memo = dataReader("memo").ToString()
-                    bookInfo.BuyDate = CType(CheckDBNull(dataReader("buy_date")), Date)
-                    bookInfo.StartReadDate = CType(CheckDBNull(dataReader("start_date")), Date)
-                    bookInfo.EndReadDate = CType(CheckDBNull(dataReader("end_date")), Date)
-                    bookInfo.RecodeDate = CType(CheckDBNull(dataReader("recode_date")), Date)
-                    bookInfo.UpdateDate = CType(CheckDBNull(dataReader("update_date")), Date)
-                End If
+                bookInfo.ID = CType(dataReader("id"), Integer)
+                bookInfo.Title = dataReader("title").ToString()
+                bookInfo.Author = dataReader("author").ToString()
+                bookInfo.BookImage = ConvertBLOBToImage(dataReader("book_image"))
+                bookInfo.Genre = dataReader("genre").ToString()
+                bookInfo.ReviewValue = CType(CheckDBNull(dataReader("review_value")), Double)
+                bookInfo.Memo = dataReader("memo").ToString()
+                bookInfo.BuyDate = CType(CheckDBNull(dataReader("buy_date")), Date)
+                bookInfo.StartReadDate = CType(CheckDBNull(dataReader("start_date")), Date)
+                bookInfo.EndReadDate = CType(CheckDBNull(dataReader("end_date")), Date)
+                bookInfo.RecodeDate = CType(CheckDBNull(dataReader("recode_date")), Date)
+                bookInfo.UpdateDate = CType(CheckDBNull(dataReader("update_date")), Date)
             End While
             dataReader.Close()
         End If
