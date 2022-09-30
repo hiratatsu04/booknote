@@ -28,7 +28,7 @@ Public Class ManageDB
     ''' データベースの値を引数bookに更新する。
     ''' </summary>
     ''' <param name="book"></param>
-    Public Sub UpdateBookData(book As Book)
+    Private Sub UpdateBookData(book As Book)
 
         ConnectDB()   ' データベースへ接続
         commandDB.Connection = connectToDB
