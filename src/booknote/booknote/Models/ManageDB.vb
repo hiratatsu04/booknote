@@ -38,7 +38,7 @@ Public Class ManageDB
 
             commandDB.CommandText =
                 $"UPDATE books SET title = @title, author = @author, book_image = @book_image,
-            genre = @genre, review_value = @review_value, memo = @memo, buy_date = @buy_date, start_date = @start_date, end_date = @end_date, update_date = '{System.DateTime.Now}' WHERE id = {book.ID};"
+            genre = @genre, review_value = @review_value, memo = @memo, buy_date = @buy_date, start_date = @start_date, end_date = @end_date, update_date = @update_date WHERE id = @id;"
 
             AddSqlParameter(commandDB, "@title", DbType.String, book.Title)
             AddSqlParameter(commandDB, "@author", DbType.String, book.Author)
@@ -49,7 +49,9 @@ Public Class ManageDB
             AddSqlParameter(commandDB, "@buy_date", DbType.String, book.BuyDate)
             AddSqlParameter(commandDB, "@start_date", DbType.String, book.StartReadDate)
             AddSqlParameter(commandDB, "@end_date", DbType.String, book.EndReadDate)
-            ' 全て入れる
+            AddSqlParameter(commandDB, "@update_date", DbType.String, System.DateTime.Now)
+            AddSqlParameter(commandDB, "@id", DbType.Int32, book.ID)
+
 
             commandDB.ExecuteNonQuery()
         Catch ex As Exception
@@ -72,7 +74,9 @@ Public Class ManageDB
         Try
             ConnectDB()   ' データベースへ接続
             commandDB.Connection = connectToDB
-            commandDB.CommandText = $"SELECT * FROM books WHERE id={id};"
+            commandDB.CommandText = $"SELECT * FROM books WHERE id=@id;"
+            AddSqlParameter(commandDB, "@id", DbType.Int32, id)
+            commandDB.ExecuteNonQuery()
 
             ' SQLの実行結果を受け取る
             dataReader = commandDB.ExecuteReader()
