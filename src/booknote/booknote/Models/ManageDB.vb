@@ -4,31 +4,29 @@ Imports System.Data.SQLite
 
 Public Class ManageDB
 
-    ' データベース関連変数の作成
-    Private connectToDB As SQLiteConnection
-    Private commandDB As SQLiteCommand
-    Private dataReader As SQLiteDataReader
-
-    ' データベースの保管場所
-    Private dbPath As String = System.Environment.CurrentDirectory + "\database\books.db"
-
     ''' <summary>
     ''' データベースへ接続
     ''' </summary>
-    Private Sub ConnectDB()
+    Public Shared Function ConnectDB() As SQLiteConnection
 
-        connectToDB = New SQLiteConnection()
-        commandDB = New SQLiteCommand()
-        dataReader = Nothing
+        Dim connectToDB As New SQLiteConnection()
+        Dim commandDB As New SQLiteCommand()
+        Dim dbPath As String = System.Environment.CurrentDirectory + "\database\books.db"
 
         connectToDB.ConnectionString = "Data Source=" + dbPath
         connectToDB.Open()
 
-    End Sub
+        Return connectToDB
 
-    Public Sub DeleteBookData(book As Book)
+    End Function
+
+    Public Shared Sub DeleteBookData(book As Book)
+
+        ' データベースへ接続
+        Dim connectToDB As SQLiteConnection = ConnectDB()
+
         Try
-            ConnectDB()   ' データベースへ接続
+            Dim commandDB As New SQLiteCommand()
             commandDB.Connection = connectToDB
             commandDB.CommandText = $"DELETE FROM books WHERE id=@id;"
             AddSqlParameter(commandDB, "@id", DbType.Int32, book.ID)
@@ -44,10 +42,13 @@ Public Class ManageDB
     ''' データベースの値を引数bookに更新する。
     ''' </summary>
     ''' <param name="book"></param>
-    Public Sub UpdateBookData(book As Book)
+    Public Shared Sub UpdateBookData(book As Book)
+
+        ' データベースへ接続
+        Dim connectToDB As SQLiteConnection = ConnectDB()
 
         Try
-            ConnectDB()   ' データベースへ接続
+            Dim commandDB As New SQLiteCommand()
             commandDB.Connection = connectToDB
 
             commandDB.CommandText =
@@ -81,12 +82,16 @@ Public Class ManageDB
     ''' </summary>
     ''' <param name="book"></param>
     ''' <returns></returns>
-    Public Function GetOneBookData(book As Book) As Book
+    Public Shared Function GetOneBookData(book As Book) As Book
 
         Dim bookInfo As New Book()
+        Dim dataReader As SQLiteDataReader
+
+        ' データベースへ接続
+        Dim connectToDB As SQLiteConnection = ConnectDB()
 
         Try
-            ConnectDB()   ' データベースへ接続
+            Dim commandDB As New SQLiteCommand()
             commandDB.Connection = connectToDB
             commandDB.CommandText = $"SELECT * FROM books WHERE id=@id;"
             AddSqlParameter(commandDB, "@id", DbType.Int32, book.ID)
@@ -127,14 +132,19 @@ Public Class ManageDB
     ''' データベースに保存されている全データを取得する
     ''' </summary>
     ''' <returns></returns>
-    Public Function GetAllBookData() As List(Of Book)
+    Public Shared Function GetAllBookData() As List(Of Book)
 
         Dim bookList As New List(Of Book)
 
+        ' データベースへ接続
+        Dim connectToDB As SQLiteConnection = ConnectDB()
+
         Try
-            ConnectDB()   ' データベースへ接続
+            Dim commandDB As New SQLiteCommand()
             commandDB.Connection = connectToDB
             commandDB.CommandText = "SELECT * FROM books;"
+
+            Dim dataReader As SQLiteDataReader
 
             ' SQLの実行結果を受け取る
             dataReader = commandDB.ExecuteReader()
@@ -172,10 +182,13 @@ Public Class ManageDB
     ''' 引数bookの値をデータベースに新規登録する
     ''' </summary>
     ''' <param name="book"></param>
-    Public Sub RecodeBook(book As Book)
+    Public Shared Sub RecodeBook(book As Book)
+
+        ' データベースへ接続
+        Dim connectToDB As SQLiteConnection = ConnectDB()
 
         Try
-            ConnectDB()   ' データベースへ接続
+            Dim commandDB As New SQLiteCommand()
             commandDB.Connection = connectToDB
 
             commandDB.CommandText =

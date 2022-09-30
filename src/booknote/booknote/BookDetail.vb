@@ -2,7 +2,6 @@ Option Strict On
 
 Public Class BookDetail
 
-    Private manageDB As ManageDB
     Private book As Book
     Private mode As FormMode
 
@@ -88,8 +87,6 @@ Public Class BookDetail
         Me.book.BuyDate = ConvertStringToDate(BuyDateTextBox.Text)
         Me.book.StartReadDate = ConvertStringToDate(StartDateTextBox.Text)
         Me.book.EndReadDate = ConvertStringToDate(EndDateTextBox.Text)
-
-        manageDB = New ManageDB()
 
         ' book.IDの値の有無で「更新」か「新規保存」かで場合分け
         If Me.book.ID Is Nothing Then
@@ -179,8 +176,19 @@ Public Class BookDetail
         ReviewTrackBar.Value = CType(Me.book.ReviewValue, Integer)
         MemoRichTextBox.Text = Me.book.Memo
         BuyDateTextBox.Text = Me.book.BuyDate.ToString("yyyyMMdd")
-        StartDateTextBox.Text = Me.book.StartReadDate.ToString("yyyyMMdd")
-        EndDateTextBox.Text = Me.book.EndReadDate.ToString("yyyyMMdd")
+
+        If Me.book.StartReadDate = #1/1/0001 12:00:00 AM# Then
+            StartDateTextBox.Text = ""
+        Else
+            StartDateTextBox.Text = Me.book.StartReadDate.ToString("yyyyMMdd")
+        End If
+
+        If Me.book.EndReadDate = #1/1/0001 12:00:00 AM# Then
+            EndDateTextBox.Text = ""
+        Else
+            EndDateTextBox.Text = Me.book.EndReadDate.ToString("yyyyMMdd")
+        End If
+
         RecodeDateLabel.Text = "登録日：" & Me.book.RecodeDate.ToString("yyyyMMdd")
         If Not Me.book.UpdateDate = #1/1/0001 12:00:00 AM# Then
             UpdateDateLabel.Text = "更新日：" & Me.book.UpdateDate.ToString("yyyyMMdd")

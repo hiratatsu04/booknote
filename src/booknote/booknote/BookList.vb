@@ -4,8 +4,6 @@ Public Class BookList
 
     ' 一覧表示のためのリスト型変数
     Private bookList As List(Of Book)
-    ' データベース操作のための変数
-    Private manageDB As ManageDB
 
     ''' <summary>
     ''' 登録ボタン押下でBookDetailフォームを開く。Showにbookを引数として指定せず、新規登録画面として開く。
@@ -17,10 +15,8 @@ Public Class BookList
         Dim bookDetail As New BookDetail()
         bookDetail.Owner = Me
 
-        Dim dialogResult As DialogResult = bookDetail.ShowDialog()
-        If dialogResult = DialogResult.OK Or dialogResult = DialogResult.Cancel Then
-            AllBookListShow()
-        End If
+        bookDetail.ShowDialog()
+        AllBookListShow()
 
     End Sub
 
@@ -37,10 +33,8 @@ Public Class BookList
         Dim bookDetail As New BookDetail(book)
         bookDetail.Owner = Me
 
-        Dim dialogResult As DialogResult = bookDetail.ShowDialog()
-        If dialogResult = DialogResult.OK Or dialogResult = DialogResult.Cancel Then
-            AllBookListShow()
-        End If
+        bookDetail.ShowDialog()
+        AllBookListShow()
 
     End Sub
 
@@ -91,7 +85,6 @@ Public Class BookList
     ''' </summary>
     Private Sub AllBookListShow()
 
-        manageDB = New ManageDB()
         ' 登録してある本の全件を取得
         bookList = manageDB.GetAllBookData()
 
@@ -127,8 +120,7 @@ Public Class BookList
 
         Dim selectedIndex As Integer = BookListView.FocusedItem.Index
         Dim book As Book = bookList(selectedIndex)
-        manageDB = New ManageDB()
-        manageDB.DeleteBookData(book)
+        ManageDB.DeleteBookData(book)
         AllBookListShow()
         BookListView.Items(selectedIndex).Selected = True
     End Sub

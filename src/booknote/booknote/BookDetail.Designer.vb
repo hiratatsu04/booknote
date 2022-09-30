@@ -225,7 +225,7 @@ Partial Class BookDetail
         Me.BuyDateTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.BuyDateTextBox.Name = "BuyDateTextBox"
         Me.BuyDateTextBox.Size = New System.Drawing.Size(182, 41)
-        Me.BuyDateTextBox.TabIndex = 37
+        Me.BuyDateTextBox.TabIndex = 4
         '
         'Label9
         '
@@ -243,7 +243,7 @@ Partial Class BookDetail
         Me.StartDateTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.StartDateTextBox.Name = "StartDateTextBox"
         Me.StartDateTextBox.Size = New System.Drawing.Size(182, 41)
-        Me.StartDateTextBox.TabIndex = 39
+        Me.StartDateTextBox.TabIndex = 5
         '
         'EndDateTextBox
         '
@@ -251,7 +251,7 @@ Partial Class BookDetail
         Me.EndDateTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.EndDateTextBox.Name = "EndDateTextBox"
         Me.EndDateTextBox.Size = New System.Drawing.Size(182, 41)
-        Me.EndDateTextBox.TabIndex = 40
+        Me.EndDateTextBox.TabIndex = 6
         '
         'EditButton
         '
