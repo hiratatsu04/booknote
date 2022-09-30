@@ -25,7 +25,10 @@ Partial Class BookList
         Me.components = New System.ComponentModel.Container()
         Me.RegisterButton = New System.Windows.Forms.Button()
         Me.BookListView = New System.Windows.Forms.ListView()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.削除ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BookImageList = New System.Windows.Forms.ImageList(Me.components)
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'RegisterButton
@@ -40,12 +43,26 @@ Partial Class BookList
         '
         'BookListView
         '
+        Me.BookListView.ContextMenuStrip = Me.ContextMenuStrip1
         Me.BookListView.HideSelection = False
         Me.BookListView.Location = New System.Drawing.Point(13, 61)
         Me.BookListView.Name = "BookListView"
         Me.BookListView.Size = New System.Drawing.Size(1211, 851)
         Me.BookListView.TabIndex = 2
         Me.BookListView.UseCompatibleStateImageBehavior = False
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.削除ToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(181, 48)
+        '
+        '削除ToolStripMenuItem
+        '
+        Me.削除ToolStripMenuItem.Name = "削除ToolStripMenuItem"
+        Me.削除ToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.削除ToolStripMenuItem.Text = "削除"
         '
         'BookImageList
         '
@@ -66,6 +83,7 @@ Partial Class BookList
         Me.MaximizeBox = False
         Me.Name = "BookList"
         Me.Text = "BookList"
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -73,4 +91,6 @@ Partial Class BookList
     Friend WithEvents RegisterButton As Button
     Friend WithEvents BookListView As ListView
     Friend WithEvents BookImageList As ImageList
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents 削除ToolStripMenuItem As ToolStripMenuItem
 End Class

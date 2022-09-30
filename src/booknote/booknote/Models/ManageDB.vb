@@ -26,6 +26,20 @@ Public Class ManageDB
 
     End Sub
 
+    Public Sub DeleteBookData(book As Book)
+        Try
+            ConnectDB()   ' データベースへ接続
+            commandDB.Connection = connectToDB
+            commandDB.CommandText = $"DELETE FROM books WHERE id=@id;"
+            AddSqlParameter(commandDB, "@id", DbType.Int32, book.ID)
+            commandDB.ExecuteNonQuery()
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        Finally
+            connectToDB.Close()
+        End Try
+    End Sub
+
     ''' <summary>
     ''' データベースの値を引数bookに更新する。
     ''' </summary>

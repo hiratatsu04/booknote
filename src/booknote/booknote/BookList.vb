@@ -123,4 +123,11 @@ Public Class BookList
 
     End Sub
 
+    Private Sub 削除ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 削除ToolStripMenuItem.Click
+
+        Dim book As Book = bookList(BookListView.FocusedItem.Index)
+        manageDB = New ManageDB()
+        manageDB.DeleteBookData(book)
+        AllBookListShow()
+    End Sub
 End Class
