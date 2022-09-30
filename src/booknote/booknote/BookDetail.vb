@@ -56,6 +56,13 @@ Public Class BookDetail
         Me.book.StartReadDate = ConvertStringToDate(StartDateTextBox.Text)
         Me.book.EndReadDate = ConvertStringToDate(EndDateTextBox.Text)
 
+        ' 入力必須項目（title、author、buydate）の値有無チェック
+        ' 値が入っていなければ登録・更新しない
+        If Me.book.Title = "" OrElse Me.book.Author = "" OrElse Me.book.BuyDate = #1/1/0001 12:00:00 AM# Then
+            MessageBox.Show("タイトル、著者、購入日は入力が必須です。")
+            Return
+        End If
+
         manageDB = New ManageDB()
 
         ' book.IDの値の有無で「更新」か「新規保存」か場合分けてしている
@@ -108,10 +115,12 @@ Public Class BookDetail
 
         Dim convertedDate As Date = Nothing
 
-        If Not DateTime.TryParseExact(str, "yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo, System.Globalization.DateTimeStyles.None, convertedDate) Then
+        If Not str = "" Then
+            If Not Date.TryParseExact(str, "yyyyMMdd", System.Globalization.DateTimeFormatInfo.InvariantInfo, System.Globalization.DateTimeStyles.None, convertedDate) Then
 
-            MessageBox.Show($"{str}の値をDate型に変換できません。")
+                MessageBox.Show($"{str}の値をDate型に変換できません。" & Environment.NewLine & "'yyyyMMdd'の形式で入力ください。")
 
+            End If
         End If
 
         Return convertedDate
