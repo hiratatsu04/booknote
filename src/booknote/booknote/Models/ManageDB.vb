@@ -79,9 +79,9 @@ Public Class ManageDB
     ''' <summary>
     ''' 引数IDに該当するデータをデータベースから取得する
     ''' </summary>
-    ''' <param name="id"></param>
+    ''' <param name="book"></param>
     ''' <returns></returns>
-    Public Function GetOneBookData(id As Integer) As Book
+    Public Function GetOneBookData(book As Book) As Book
 
         Dim bookInfo As New Book()
 
@@ -89,7 +89,7 @@ Public Class ManageDB
             ConnectDB()   ' データベースへ接続
             commandDB.Connection = connectToDB
             commandDB.CommandText = $"SELECT * FROM books WHERE id=@id;"
-            AddSqlParameter(commandDB, "@id", DbType.Int32, id)
+            AddSqlParameter(commandDB, "@id", DbType.Int32, book.ID)
             commandDB.ExecuteNonQuery()
 
             ' SQLの実行結果を受け取る

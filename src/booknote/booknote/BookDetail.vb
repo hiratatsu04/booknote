@@ -4,12 +4,20 @@ Public Class BookDetail
 
     Private manageDB As ManageDB
     Private book As Book
+    Private mode As FormMode
+
+    Enum FormMode
+        Edit
+        Regist
+        Show
+    End Enum
 
     ''' <summary>
     ''' コンストラクタ
     ''' </summary>
     Sub New()
         InitializeComponent()
+        mode = FormMode.Regist
     End Sub
 
     ''' <summary>
@@ -21,6 +29,7 @@ Public Class BookDetail
         InitializeComponent()
         ShowBookData()
         ControlShowMode()
+        mode = FormMode.Show
     End Sub
 
     ''' <summary>
@@ -72,11 +81,16 @@ Public Class BookDetail
             manageDB.UpdateBookData(Me.book)
         End If
 
-        ControlShowMode()
-
-        ' 一覧表示フォームにOKを渡す
-        Me.DialogResult = DialogResult.OK
-        Me.Close()
+        ' 更新モードの場合はフォームを閉じない
+        If mode = FormMode.Edit Then
+            ControlShowMode()
+            book = manageDB.GetOneBookData(book)
+            ShowBookData()
+        Else
+            ' 一覧表示フォームにOKを渡す
+            Me.DialogResult = DialogResult.OK
+            Me.Close()
+        End If
 
     End Sub
 
@@ -167,7 +181,11 @@ Public Class BookDetail
     ''' <param name="e"></param>
     Private Sub EditButton_Click(sender As Object, e As EventArgs) Handles EditButton.Click
 
-        ControlEditMode()
+        If mode = FormMode.Show Then
+            ControlEditMode()
+        ElseIf mode = FormMode.Edit Then
+            ControlShowMode()
+        End If
 
     End Sub
 
@@ -186,8 +204,9 @@ Public Class BookDetail
         StartDateTextBox.Enabled = True
         EndDateTextBox.Enabled = True
         SaveButton.Enabled = True
-        EditButton.Enabled = False
         SaveButton.Text = "更新"
+        EditButton.Text = "キャンセル"
+        mode = FormMode.Edit
     End Sub
 
     ''' <summary>
@@ -206,6 +225,8 @@ Public Class BookDetail
         StartDateTextBox.Enabled = False
         EndDateTextBox.Enabled = False
         SaveButton.Enabled = False
+        EditButton.Text = "編集"
+        mode = FormMode.Show
     End Sub
 
 End Class
