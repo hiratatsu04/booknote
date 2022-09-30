@@ -10,10 +10,10 @@ Public Class BookDetail
     ''' </summary>
     ''' <param name="owner"></param>
     ''' <param name="book"></param>
-    Public Overloads Sub Show(ByVal owner As IWin32Window,
+    Public Overloads Sub ShowDialog(ByVal owner As IWin32Window,
                             ByVal book As Book)
         Me.book = book
-        MyBase.Show(owner)
+        MyBase.ShowDialog(owner)
         ShowBookData()
 
         ControlShowMode()

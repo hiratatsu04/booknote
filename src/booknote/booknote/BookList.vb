@@ -14,8 +14,9 @@ Public Class BookList
     ''' <param name="e"></param>
     Private Sub BtnRegister_Click(sender As Object, e As EventArgs) Handles RegisterButton.Click
 
-        Dim f As New BookDetail()
-        f.Show(Me)
+        Dim bookDetail As New BookDetail()
+        bookDetail.Owner = Me
+        bookDetail.ShowDialog()
 
     End Sub
 
@@ -142,7 +143,7 @@ Public Class BookList
         Dim book As Book = bookList(lv.FocusedItem.Index)
 
         Dim f As New BookDetail()
-        f.Show(Me, book)
+        f.ShowDialog(Me, book)
 
     End Sub
 End Class
