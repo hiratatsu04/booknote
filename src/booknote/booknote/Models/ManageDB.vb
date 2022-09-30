@@ -169,13 +169,21 @@ Public Class ManageDB
 
             AddSqlParameter(commandDB, "@title", DbType.String, book.Title)
             AddSqlParameter(commandDB, "@author", DbType.String, book.Author)
-            AddSqlParameter(commandDB, "@book_image", DbType.Binary, ConvertImageToByte(book.BookImage))
             AddSqlParameter(commandDB, "@genre", DbType.String, book.Genre)
             AddSqlParameter(commandDB, "@review_value", DbType.String, book.ReviewValue)
             AddSqlParameter(commandDB, "@memo", DbType.String, book.Memo)
             AddSqlParameter(commandDB, "@buy_date", DbType.String, book.BuyDate)
             AddSqlParameter(commandDB, "@start_date", DbType.String, book.StartReadDate)
             AddSqlParameter(commandDB, "@end_date", DbType.String, book.EndReadDate)
+
+            ' 書籍データが無ければNoImage画像を保存する
+            If book.BookImage Is Nothing Then
+                Dim filePath As String = System.Environment.CurrentDirectory + "\image\noimage.png"
+                Dim noImage As Image = Bitmap.FromFile(filePath)
+                AddSqlParameter(commandDB, "@book_image", DbType.Binary, ConvertImageToByte(noImage))
+            Else
+                AddSqlParameter(commandDB, "@book_image", DbType.Binary, ConvertImageToByte(book.BookImage))
+            End If
 
             commandDB.ExecuteNonQuery()
         Catch ex As Exception

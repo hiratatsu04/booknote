@@ -111,15 +111,8 @@ Public Class BookList
 
             bookTitle.Add(book.Title)
 
-            ' 本のサムネイル画像がなければ、Noimageを適応する
-            If book.BookImage Is Nothing Then
-                Dim filePath As String = System.Environment.CurrentDirectory + "\image\noimage.png"
-                Dim noImage As Image = Bitmap.FromFile(filePath)
-                Dim thumbnail As Image = createThumbnail(noImage, width, height)
-                BookImageList.Images.Add(thumbnail)
-            Else
-                BookImageList.Images.Add(book.BookImage)
-            End If
+            Dim thumbnail As Image = createThumbnail(book.BookImage, width, height)
+            BookImageList.Images.Add(thumbnail)
 
         Next
 

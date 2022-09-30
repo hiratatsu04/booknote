@@ -26,6 +26,7 @@ Partial Class BookList
         Me.RegisterButton = New System.Windows.Forms.Button()
         Me.BookListView = New System.Windows.Forms.ListView()
         Me.BookImageList = New System.Windows.Forms.ImageList(Me.components)
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'RegisterButton
@@ -53,11 +54,19 @@ Partial Class BookList
         Me.BookImageList.ImageSize = New System.Drawing.Size(16, 16)
         Me.BookImageList.TransparentColor = System.Drawing.Color.Transparent
         '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(109, 11)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(660, 41)
+        Me.TextBox1.TabIndex = 3
+        '
         'BookList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 27.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1236, 924)
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.BookListView)
         Me.Controls.Add(Me.RegisterButton)
         Me.Font = New System.Drawing.Font("游ゴシック", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -67,10 +76,12 @@ Partial Class BookList
         Me.Name = "BookList"
         Me.Text = "BookList"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents RegisterButton As Button
     Friend WithEvents BookListView As ListView
     Friend WithEvents BookImageList As ImageList
+    Friend WithEvents TextBox1 As TextBox
 End Class
