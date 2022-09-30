@@ -67,7 +67,7 @@ Public Class BookList
     ''' <param name="w"></param>
     ''' <param name="h"></param>
     ''' <returns></returns>
-    Function createThumbnail(ByVal image As Image, ByVal w As Integer, ByVal h As Integer) As Image
+    Public Shared Function CreateThumbnail(ByVal image As Image, ByVal w As Integer, ByVal h As Integer) As Image
         Dim canvas As New Bitmap(w, h)
 
         Dim g As Graphics = Graphics.FromImage(canvas)
@@ -96,8 +96,8 @@ Public Class BookList
         bookList = manageDB.GetAllBookData()
 
         ' サムネイル画像のサイズを設定
-        Dim width As Integer = 250
-        Dim height As Integer = 200
+        Dim width As Integer = 170
+        Dim height As Integer = 256
 
         BookImageList.Dispose()
         BookListView.Clear()
@@ -111,7 +111,7 @@ Public Class BookList
 
             bookTitle.Add(book.Title)
 
-            Dim thumbnail As Image = createThumbnail(book.BookImage, width, height)
+            Dim thumbnail As Image = CreateThumbnail(book.BookImage, width, height)
             BookImageList.Images.Add(thumbnail)
 
         Next
@@ -120,6 +120,7 @@ Public Class BookList
         For i As Integer = 0 To (BookImageList.Images.Count - 1)
             BookListView.Items.Add(bookTitle(i), i)
         Next
+
     End Sub
 
 End Class
