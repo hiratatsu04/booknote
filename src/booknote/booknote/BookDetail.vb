@@ -205,6 +205,8 @@ Public Class BookDetail
         EndDateTextBox.Enabled = True
         SaveButton.Enabled = True
         SaveButton.Text = "更新"
+        EditButton.Left = 635 - 60
+        EditButton.Width = 70 + 60
         EditButton.Text = "キャンセル"
         mode = FormMode.Edit
     End Sub
@@ -225,6 +227,8 @@ Public Class BookDetail
         StartDateTextBox.Enabled = False
         EndDateTextBox.Enabled = False
         SaveButton.Enabled = False
+        EditButton.Left = 635
+        EditButton.Width = 70
         EditButton.Text = "編集"
         mode = FormMode.Show
     End Sub
