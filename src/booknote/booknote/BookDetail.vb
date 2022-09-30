@@ -5,19 +5,15 @@ Public Class BookDetail
     Private manageDB As ManageDB
     Private book As Book
 
-    ''' <summary>
-    ''' 引数にbookを指定すると、bookの情報をフォームに表示する
-    ''' </summary>
-    ''' <param name="owner"></param>
-    ''' <param name="book"></param>
-    Public Overloads Sub ShowDialog(ByVal owner As IWin32Window,
-                            ByVal book As Book)
+    Sub New()
+        InitializeComponent()
+    End Sub
+
+    Sub New(book As Book)
         Me.book = book
-        MyBase.ShowDialog(owner)
+        InitializeComponent()
         ShowBookData()
-
         ControlShowMode()
-
     End Sub
 
     ' TrackBarがInteger型しか受け付けないので、10で割っている
@@ -31,29 +27,33 @@ Public Class BookDetail
     ' bookの値の有無で「更新」か「新規保存」か場合分けてしている
     Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
 
-        If book Is Nothing Then
-            book = New Book()
+        If Me.book Is Nothing Then
+            Me.book = New Book()
         End If
 
-        book.Title = TitleTextBox.Text
-        book.Author = AuthorTextBox.Text
-        book.BookImage = BookImagePictureBox.Image
-        book.Genre = GenreTextBox.Text
-        book.ReviewValue = ReviewTrackBar.Value
-        book.Memo = MemoRichTextBox.Text
-        book.BuyDate = ConvertStringToDate(BuyDateTextBox.Text)
-        book.StartReadDate = ConvertStringToDate(StartDateTextBox.Text)
-        book.EndReadDate = ConvertStringToDate(EndDateTextBox.Text)
+        Me.book.Title = TitleTextBox.Text
+        Me.book.Author = AuthorTextBox.Text
+        Me.book.BookImage = BookImagePictureBox.Image
+        Me.book.Genre = GenreTextBox.Text
+        Me.book.ReviewValue = ReviewTrackBar.Value
+        Me.book.Memo = MemoRichTextBox.Text
+        Me.book.BuyDate = ConvertStringToDate(BuyDateTextBox.Text)
+        Me.book.StartReadDate = ConvertStringToDate(StartDateTextBox.Text)
+        Me.book.EndReadDate = ConvertStringToDate(EndDateTextBox.Text)
 
         manageDB = New ManageDB()
 
-        If book.ID Is Nothing Then
-            manageDB.RecodeBook(book)
+        If Me.book.ID Is Nothing Then
+            manageDB.RecodeBook(Me.book)
         Else
-            manageDB.UpdateBookData(book)
+            manageDB.UpdateBookData(Me.book)
         End If
 
         ControlShowMode()
+
+        ' 一覧表示フォームを更新する
+        Me.DialogResult = DialogResult.OK
+        Me.Close()
 
     End Sub
 
@@ -117,16 +117,16 @@ Public Class BookDetail
     ''' </summary>
     Private Sub ShowBookData()
 
-        TitleTextBox.Text = book.Title
-        AuthorTextBox.Text = book.Author
-        BookImagePictureBox.Image = book.BookImage
-        GenreTextBox.Text = book.Genre
-        ReviewLabel.Text = (book.ReviewValue / 10).ToString()
-        ReviewTrackBar.Value = CType(book.ReviewValue, Integer)
-        MemoRichTextBox.Text = book.Memo
-        BuyDateTextBox.Text = book.BuyDate.ToString("yyyyMMdd")
-        StartDateTextBox.Text = book.StartReadDate.ToString("yyyyMMdd")
-        EndDateTextBox.Text = book.EndReadDate.ToString("yyyyMMdd")
+        TitleTextBox.Text = Me.book.Title
+        AuthorTextBox.Text = Me.book.Author
+        BookImagePictureBox.Image = Me.book.BookImage
+        GenreTextBox.Text = Me.book.Genre
+        ReviewLabel.Text = (Me.book.ReviewValue / 10).ToString()
+        ReviewTrackBar.Value = CType(Me.book.ReviewValue, Integer)
+        MemoRichTextBox.Text = Me.book.Memo
+        BuyDateTextBox.Text = Me.book.BuyDate.ToString("yyyyMMdd")
+        StartDateTextBox.Text = Me.book.StartReadDate.ToString("yyyyMMdd")
+        EndDateTextBox.Text = Me.book.EndReadDate.ToString("yyyyMMdd")
 
     End Sub
 

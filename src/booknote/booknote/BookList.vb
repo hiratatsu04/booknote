@@ -16,6 +16,24 @@ Public Class BookList
 
         Dim bookDetail As New BookDetail()
         bookDetail.Owner = Me
+        If DialogResult.OK = bookDetail.ShowDialog() Then
+            AllBookListShow()
+        End If
+
+    End Sub
+
+    ''' <summary>
+    ''' ListViewに表示されているコントロールをシングルクリックしたときの動作。
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub BookListViewItemActivate(sender As Object, e As EventArgs) Handles BookListView.ItemActivate
+
+        Dim lv As ListView = DirectCast(sender, ListView)
+        Dim book As Book = bookList(lv.FocusedItem.Index)
+
+        Dim bookDetail As New BookDetail(book)
+        bookDetail.Owner = Me
         bookDetail.ShowDialog()
 
     End Sub
@@ -27,42 +45,7 @@ Public Class BookList
     ''' <param name="e"></param>
     Private Sub BookList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        manageDB = New ManageDB()
-        ' 登録してある本の全件を取得
-        bookList = manageDB.GetAllBookData()
-
-        ' サムネイル画像のサイズを設定
-        Dim width As Integer = 250
-        Dim height As Integer = 200
-
-        BookImageList.Dispose()
-        BookListView.Clear()
-        BookImageList.ImageSize = New Size(Width, Height)
-        BookListView.LargeImageList = BookImageList
-
-        ' サムネイルに表示する本のタイトルをリストで持っておく
-        Dim bookTitle As New List(Of String)
-
-        For Each book As Book In bookList
-
-            bookTitle.Add(book.Title)
-
-            ' 本のサムネイル画像がなければ、Noimageを適応する
-            If book.BookImage Is Nothing Then
-                Dim filePath As String = System.Environment.CurrentDirectory + "\image\noimage.png"
-                Dim noImage As Image = Bitmap.FromFile(filePath)
-                Dim thumbnail As Image = createThumbnail(noImage, width, height)
-                BookImageList.Images.Add(thumbnail)
-            Else
-                BookImageList.Images.Add(book.BookImage)
-            End If
-
-        Next
-
-        ' ListViewへサムネイル画像と本のタイトルを表示する
-        For i As Integer = 0 To (BookImageList.Images.Count - 1)
-            BookListView.Items.Add(bookTitle(i), i)
-        Next
+        AllBookListShow()
 
         ' ポイントで選択できるようにする
         BookListView.HoverSelection = True
@@ -135,15 +118,44 @@ Public Class BookList
         Next
     End Sub
 
-    ' ListViewに表示されているコントロールをシングルクリックしたときの動作
-    ' bookオブジェクトを引数に指定する
-    Private Sub BookListViewItemActivate(sender As Object, e As EventArgs) Handles BookListView.ItemActivate
+    Private Sub AllBookListShow()
 
-        Dim lv As ListView = DirectCast(sender, ListView)
-        Dim book As Book = bookList(lv.FocusedItem.Index)
+        manageDB = New ManageDB()
+        ' 登録してある本の全件を取得
+        bookList = manageDB.GetAllBookData()
 
-        Dim f As New BookDetail()
-        f.ShowDialog(Me, book)
+        ' サムネイル画像のサイズを設定
+        Dim width As Integer = 250
+        Dim height As Integer = 200
 
+        BookImageList.Dispose()
+        BookListView.Clear()
+        BookImageList.ImageSize = New Size(width, height)
+        BookListView.LargeImageList = BookImageList
+
+        ' サムネイルに表示する本のタイトルをリストで持っておく
+        Dim bookTitle As New List(Of String)
+
+        For Each book As Book In bookList
+
+            bookTitle.Add(book.Title)
+
+            ' 本のサムネイル画像がなければ、Noimageを適応する
+            If book.BookImage Is Nothing Then
+                Dim filePath As String = System.Environment.CurrentDirectory + "\image\noimage.png"
+                Dim noImage As Image = Bitmap.FromFile(filePath)
+                Dim thumbnail As Image = createThumbnail(noImage, width, height)
+                BookImageList.Images.Add(thumbnail)
+            Else
+                BookImageList.Images.Add(book.BookImage)
+            End If
+
+        Next
+
+        ' ListViewへサムネイル画像と本のタイトルを表示する
+        For i As Integer = 0 To (BookImageList.Images.Count - 1)
+            BookListView.Items.Add(bookTitle(i), i)
+        Next
     End Sub
+
 End Class

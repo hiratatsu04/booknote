@@ -49,6 +49,7 @@ Public Class ManageDB
             AddSqlParameter(commandDB, "@buy_date", DbType.String, book.BuyDate)
             AddSqlParameter(commandDB, "@start_date", DbType.String, book.StartReadDate)
             AddSqlParameter(commandDB, "@end_date", DbType.String, book.EndReadDate)
+            ' 全て入れる
 
             commandDB.ExecuteNonQuery()
         Catch ex As Exception
