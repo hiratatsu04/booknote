@@ -26,7 +26,6 @@ Partial Class BookList
         Me.RegisterButton = New System.Windows.Forms.Button()
         Me.BookListView = New System.Windows.Forms.ListView()
         Me.BookImageList = New System.Windows.Forms.ImageList(Me.components)
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'RegisterButton
@@ -54,22 +53,11 @@ Partial Class BookList
         Me.BookImageList.ImageSize = New System.Drawing.Size(16, 16)
         Me.BookImageList.TransparentColor = System.Drawing.Color.Transparent
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(433, 15)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(233, 37)
-        Me.Button1.TabIndex = 3
-        Me.Button1.Text = "更新(最終的には消す)"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'BookList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 27.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1236, 924)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.BookListView)
         Me.Controls.Add(Me.RegisterButton)
         Me.Font = New System.Drawing.Font("游ゴシック", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -85,5 +73,4 @@ Partial Class BookList
     Friend WithEvents RegisterButton As Button
     Friend WithEvents BookListView As ListView
     Friend WithEvents BookImageList As ImageList
-    Friend WithEvents Button1 As Button
 End Class

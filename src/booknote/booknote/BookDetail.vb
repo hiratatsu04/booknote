@@ -5,10 +5,17 @@ Public Class BookDetail
     Private manageDB As ManageDB
     Private book As Book
 
+    ''' <summary>
+    ''' コンストラクタ
+    ''' </summary>
     Sub New()
         InitializeComponent()
     End Sub
 
+    ''' <summary>
+    ''' 引数ありコンストラクタ。引数のbookの値をフォームに表示する
+    ''' </summary>
+    ''' <param name="book"></param>
     Sub New(book As Book)
         Me.book = book
         InitializeComponent()
@@ -16,17 +23,25 @@ Public Class BookDetail
         ControlShowMode()
     End Sub
 
-    ' TrackBarがInteger型しか受け付けないので、10で割っている
+    ''' <summary>
+    ''' TrackBarスクロールの動作。Integer型のTrackBarを10で割って、0.1段階で数値を扱えるようにしている。
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles ReviewTrackBar.Scroll
 
         ReviewLabel.Text = (ReviewTrackBar.Value / 10).ToString("0.0")
 
     End Sub
 
-    ' 保存ボタンの動作
-    ' bookの値の有無で「更新」か「新規保存」か場合分けてしている
+    ''' <summary>
+    ''' 保存ボタンの動作
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
 
+        ' bookの値の有無で「更新」か「新規保存」か場合分けてしている
         If Me.book Is Nothing Then
             Me.book = New Book()
         End If
@@ -43,6 +58,7 @@ Public Class BookDetail
 
         manageDB = New ManageDB()
 
+        ' book.IDの値の有無で「更新」か「新規保存」か場合分けてしている
         If Me.book.ID Is Nothing Then
             manageDB.RecodeBook(Me.book)
         Else
@@ -51,16 +67,14 @@ Public Class BookDetail
 
         ControlShowMode()
 
-        ' 一覧表示フォームを更新する
+        ' 一覧表示フォームにOKを渡す
         Me.DialogResult = DialogResult.OK
         Me.Close()
 
     End Sub
 
-    ' 画像登録ボタンの動作
-    ' ダイアログを表示し、PictureBoxに選択した画像を表示する
     ''' <summary>
-    ''' 
+    ''' 画像登録ボタンの動作。ダイアログを表示し、PictureBoxに選択した画像を表示する。
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
@@ -104,10 +118,15 @@ Public Class BookDetail
 
     End Function
 
-    ' 戻るボタンの動作
-    ' 戻ると同時に、BookListに一覧表示動作をさせたいが未実装
+    ''' <summary>
+    ''' 戻るボタンの動作
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub ReturnButton_Click(sender As Object, e As EventArgs) Handles ReturnButton.Click
 
+        ' 一覧表示フォームにOKを渡す
+        Me.DialogResult = DialogResult.OK
         Me.Close()
 
     End Sub
@@ -130,7 +149,11 @@ Public Class BookDetail
 
     End Sub
 
-    ' 編集ボタン押下時の動作
+    ''' <summary>
+    ''' 編集ボタンの動作
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub EditButton_Click(sender As Object, e As EventArgs) Handles EditButton.Click
 
         ControlEditMode()

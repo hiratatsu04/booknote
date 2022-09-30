@@ -16,7 +16,9 @@ Public Class BookList
 
         Dim bookDetail As New BookDetail()
         bookDetail.Owner = Me
-        If DialogResult.OK = bookDetail.ShowDialog() Then
+
+        Dim dialogResult As DialogResult = bookDetail.ShowDialog()
+        If dialogResult = DialogResult.OK Or dialogResult = DialogResult.Cancel Then
             AllBookListShow()
         End If
 
@@ -34,7 +36,11 @@ Public Class BookList
 
         Dim bookDetail As New BookDetail(book)
         bookDetail.Owner = Me
-        bookDetail.ShowDialog()
+
+        Dim dialogResult As DialogResult = bookDetail.ShowDialog()
+        If dialogResult = DialogResult.OK Or dialogResult = DialogResult.Cancel Then
+            AllBookListShow()
+        End If
 
     End Sub
 
@@ -54,9 +60,13 @@ Public Class BookList
 
     End Sub
 
-
-    ' 幅w、高さhのImageオブジェクトを作成
-    ' 何しているのかまだわかっていない。後で理解する。
+    ''' <summary>
+    ''' 幅w、高さhのImageオブジェクトを作成
+    ''' </summary>
+    ''' <param name="image"></param>
+    ''' <param name="w"></param>
+    ''' <param name="h"></param>
+    ''' <returns></returns>
     Function createThumbnail(ByVal image As Image, ByVal w As Integer, ByVal h As Integer) As Image
         Dim canvas As New Bitmap(w, h)
 
@@ -76,48 +86,9 @@ Public Class BookList
         Return canvas
     End Function
 
-    ' 更新ボタン（最終的には消す予定）を押したときの動作
-    ' BookDetailフォームからBookListフォームに戻った時にこの動作を実装したい。
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        manageDB = New ManageDB()
-        ' 登録してある本の全件を取得
-        bookList = manageDB.GetAllBookData()
-
-        ' サムネイル画像のサイズを設定
-        Dim width As Integer = 250
-        Dim height As Integer = 200
-
-        ' ImageListとLIstViewを初期化
-        BookImageList.Dispose()
-        BookListView.Clear()
-        BookImageList.ImageSize = New Size(width, height)
-        BookListView.LargeImageList = BookImageList
-
-        ' サムネイルに表示する本のタイトルをリストで持っておく
-        Dim bookTitle As New List(Of String)
-
-        For Each book As Book In bookList
-
-            bookTitle.Add(book.Title)
-
-            ' 本のサムネイル画像がなければ、Noimageを適応する
-            If book.BookImage Is Nothing Then
-                Dim filePath As String = System.Environment.CurrentDirectory + "\image\noimage.png"
-                Dim noImage As Image = Bitmap.FromFile(filePath)
-                Dim thumbnail As Image = createThumbnail(noImage, width, height)
-                BookImageList.Images.Add(thumbnail)
-            Else
-                BookImageList.Images.Add(book.BookImage)
-            End If
-
-        Next
-
-        ' ListViewへサムネイル画像と本のタイトルを表示する
-        For i As Integer = 0 To (BookImageList.Images.Count - 1)
-            BookListView.Items.Add(bookTitle(i), i)
-        Next
-    End Sub
-
+    ''' <summary>
+    ''' 本をデータベースから全件取得し、BookListViewに表示する
+    ''' </summary>
     Private Sub AllBookListShow()
 
         manageDB = New ManageDB()
