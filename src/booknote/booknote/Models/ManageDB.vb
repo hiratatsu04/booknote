@@ -11,15 +11,57 @@ Public Class ManageDB
 
         Dim connectToDB As New SQLiteConnection()
         Dim commandDB As New SQLiteCommand()
-        Dim dbPath As String = System.Environment.CurrentDirectory + "\database\books.db"
 
-        connectToDB.ConnectionString = "Data Source=" + dbPath
+        connectToDB.ConnectionString = "Data Source=books.db"
         connectToDB.Open()
 
         Return connectToDB
 
     End Function
 
+    Public Shared Sub CreateDB(DbName As String)
+        SQLiteConnection.CreateFile(DbName)
+    End Sub
+
+    Public Shared Sub CreateTable()
+
+        ' データベースへ接続
+        Dim connectToDB As SQLiteConnection = ConnectDB()
+
+        Try
+            'connectToDB.Open()
+            Dim commandDB As New SQLiteCommand()
+            commandDB.Connection = connectToDB
+
+            commandDB.CommandText = "CREATE TABLE books (
+	                                id	INTEGER NOT NULL,
+	                                title	TEXT NOT NULL,
+	                                author	TEXT NOT NULL,
+	                                book_image	BLOB,
+	                                genre	TEXT,
+	                                review_value	REAL,
+	                                memo	TEXT,
+	                                buy_date	TEXT NOT NULL,
+	                                start_date	TEXT,
+	                                end_date	TEXT,
+	                                recode_date	TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
+	                                update_date	TEXT,
+	                                PRIMARY KEY(id AUTOINCREMENT)
+                                );"
+
+            commandDB.ExecuteNonQuery()
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        Finally
+            connectToDB.Close()
+        End Try
+
+    End Sub
+
+    ''' <summary>
+    ''' データベースから引数bookを削除
+    ''' </summary>
+    ''' <param name="book"></param>
     Public Shared Sub DeleteBookData(book As Book)
 
         ' データベースへ接続

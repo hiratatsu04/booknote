@@ -45,6 +45,12 @@ Public Class BookList
     ''' <param name="e"></param>
     Private Sub BookList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ' データベースがなければ作成する
+        If Not System.IO.File.Exists("books.db") Then
+            ManageDB.CreateDB("books.db")
+            ManageDB.CreateTable()
+        End If
+
         AllBookListShow()
 
         ' ポイントで選択できるようにする
