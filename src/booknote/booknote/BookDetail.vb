@@ -49,29 +49,9 @@ Public Class BookDetail
     ''' <param name="e"></param>
     Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
 
-        ' 入力必須項目（title、author、buydate）の値有無チェック
+        ' 入力必須項目の値有無チェック
         ' 値が入っていなければ登録・更新しない
-        If TitleTextBox.Text = "" OrElse AuthorTextBox.Text = "" OrElse BuyDateTextBox.Text = "" Then
-            MessageBox.Show("タイトル、著者、購入日は入力が必須です。")
-            Return
-        End If
-
-        ' 日付入力テキストの形式チェック
-        If Not BuyDateTextBox.Text = "" AndAlso ConvertStringToDate(BuyDateTextBox.Text) = Nothing Then
-            BuyDateTextBox.Clear()
-            BuyDateTextBox.Focus()
-            Return
-        End If
-        If Not StartDateTextBox.Text = "" AndAlso ConvertStringToDate(StartDateTextBox.Text) = Nothing Then
-            StartDateTextBox.Clear()
-            StartDateTextBox.Focus()
-            Return
-        End If
-        If Not EndDateTextBox.Text = "" AndAlso ConvertStringToDate(EndDateTextBox.Text) = Nothing Then
-            EndDateTextBox.Clear()
-            EndDateTextBox.Focus()
-            Return
-        End If
+        If Not IsValid() Then Return
 
         ' bookの値の有無で「更新」か「新規保存」かで場合分け
         If Me.book Is Nothing Then
@@ -107,6 +87,38 @@ Public Class BookDetail
         End If
 
     End Sub
+
+    ''' <summary>
+    '''　入力値のチェック。必要項目への記入漏れ、日付形式の確認を行う。
+    ''' </summary>
+    ''' <returns>入力値が正しければTrue 、そうでなければFalseを返す</returns>
+    Private Function IsValid() As Boolean
+
+        If TitleTextBox.Text = "" OrElse AuthorTextBox.Text = "" OrElse BuyDateTextBox.Text = "" Then
+            MessageBox.Show("タイトル、著者、購入日は入力が必須です。")
+            Return False
+        End If
+
+        ' 日付入力テキストの形式チェック
+        If Not BuyDateTextBox.Text = "" AndAlso ConvertStringToDate(BuyDateTextBox.Text) = Nothing Then
+            BuyDateTextBox.Clear()
+            BuyDateTextBox.Focus()
+            Return False
+        End If
+        If Not StartDateTextBox.Text = "" AndAlso ConvertStringToDate(StartDateTextBox.Text) = Nothing Then
+            StartDateTextBox.Clear()
+            StartDateTextBox.Focus()
+            Return False
+        End If
+        If Not EndDateTextBox.Text = "" AndAlso ConvertStringToDate(EndDateTextBox.Text) = Nothing Then
+            EndDateTextBox.Clear()
+            EndDateTextBox.Focus()
+            Return False
+        End If
+
+        Return True
+
+    End Function
 
     ''' <summary>
     ''' 画像登録ボタンの動作。ダイアログを表示し、PictureBoxに選択した画像を表示する。
