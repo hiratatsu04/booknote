@@ -6,9 +6,9 @@ Public Class BookDetail
     Private mode As FormMode
 
     Enum FormMode
-        Edit
-        Regist
-        Show
+        Edit    ' 編集モード
+        Regist  ' 新規登録モード
+        Show    ' 本の情報表示モード（編集不可）
     End Enum
 
     ''' <summary>
@@ -53,8 +53,8 @@ Public Class BookDetail
         ' 値が入っていなければ登録・更新しない
         If Not IsValid() Then Return
 
-        ' bookの値の有無で「更新」か「新規保存」かで場合分け
-        If Me.book Is Nothing Then
+        ' 新規登録モードであれば、bookオブジェクトをを新規作成
+        If mode = FormMode.Regist Then
             Me.book = New Book()
         End If
 
@@ -68,11 +68,11 @@ Public Class BookDetail
         Me.book.StartReadDate = ConvertStringToDate(StartDateTextBox.Text)
         Me.book.EndReadDate = ConvertStringToDate(EndDateTextBox.Text)
 
-        ' book.IDの値の有無で「更新」か「新規保存」かで場合分け
-        If Me.book.ID Is Nothing Then
-            manageDB.RecodeBook(Me.book)
+        ' モードにより、新規登録か更新か分岐
+        If mode = FormMode.Regist Then
+            ManageDB.RecodeBook(Me.book)
         Else
-            manageDB.UpdateBookData(Me.book)
+            ManageDB.UpdateBookData(Me.book)
         End If
 
         ' 更新モードの場合はフォームを閉じない
@@ -161,19 +161,6 @@ Public Class BookDetail
         Return convertedDate
 
     End Function
-
-    ''' <summary>
-    ''' 戻るボタンの動作
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub ReturnButton_Click(sender As Object, e As EventArgs)
-
-        ' 一覧表示フォームにOKを渡す
-        Me.DialogResult = DialogResult.OK
-        Me.Close()
-
-    End Sub
 
     ''' <summary>
     ''' 設定されているbookのデータを各種コントロールに代入する
