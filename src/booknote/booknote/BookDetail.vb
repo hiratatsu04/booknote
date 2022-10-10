@@ -70,20 +70,21 @@ Public Class BookDetail
 
         ' モードにより、新規登録か更新か分岐
         If mode = FormMode.Regist Then
+            ' bookの情報を登録する
             ManageDB.RecodeBook(Me.book)
-        Else
-            ManageDB.UpdateBookData(Me.book)
-        End If
 
-        ' 更新モードの場合はフォームを閉じない
-        If mode = FormMode.Edit Then
-            ControlShowMode()
-            book = manageDB.GetOneBookData(book)
-            ShowBookData()
-        Else
-            ' 一覧表示フォームにOKを渡す
+            ' 一覧表示フォームにOKを渡してフォームを閉じる
             Me.DialogResult = DialogResult.OK
             Me.Close()
+        Else
+            ' bookの情報を更新する
+            ManageDB.UpdateBookData(Me.book)
+
+            ControlShowMode()
+
+            ' 更新日を取得するために、bookオブジェクトの内容を取得
+            book = ManageDB.GetOneBookData(book)
+            ShowBookData()
         End If
 
     End Sub
