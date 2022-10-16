@@ -26,7 +26,7 @@ Public Class BookDetail
     Sub New(book As Book)
         Me.book = book
         InitializeComponent()
-        ShowBookData()
+        SetBookData()
         ControlShowMode()
         mode = FormMode.Show
     End Sub
@@ -84,7 +84,7 @@ Public Class BookDetail
 
             ' 更新日を取得するために、bookオブジェクトの内容を取得
             book = ManageDB.GetOneBookData(book)
-            ShowBookData()
+            SetBookData()
         End If
 
     End Sub
@@ -166,7 +166,7 @@ Public Class BookDetail
     ''' <summary>
     ''' 設定されているbookのデータを各種コントロールに代入する
     ''' </summary>
-    Private Sub ShowBookData()
+    Private Sub SetBookData()
 
         TitleTextBox.Text = Me.book.Title
         AuthorTextBox.Text = Me.book.Author
