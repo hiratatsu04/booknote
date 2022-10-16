@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class BookDetail
     Inherits System.Windows.Forms.Form
 
     'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,9 +20,8 @@ Partial Class BookDetail
     'メモ: 以下のプロシージャは Windows フォーム デザイナーで必要です。
     'Windows フォーム デザイナーを使用して変更できます。  
     'コード エディターを使って変更しないでください。
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ReturnButton = New System.Windows.Forms.Button()
         Me.SaveButton = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -31,7 +30,6 @@ Partial Class BookDetail
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.MemoRichTextBox = New System.Windows.Forms.RichTextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.TitleTextBox = New System.Windows.Forms.TextBox()
         Me.AuthorTextBox = New System.Windows.Forms.TextBox()
@@ -44,20 +42,13 @@ Partial Class BookDetail
         Me.Label9 = New System.Windows.Forms.Label()
         Me.StartDateTextBox = New System.Windows.Forms.TextBox()
         Me.EndDateTextBox = New System.Windows.Forms.TextBox()
+        Me.EditButton = New System.Windows.Forms.Button()
+        Me.RecodeDateLabel = New System.Windows.Forms.Label()
+        Me.MemoRichTextBox = New System.Windows.Forms.RichTextBox()
+        Me.UpdateDateLabel = New System.Windows.Forms.Label()
         CType(Me.ReviewTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BookImagePictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'ReturnButton
-        '
-        Me.ReturnButton.Location = New System.Drawing.Point(11, 10)
-        Me.ReturnButton.Margin = New System.Windows.Forms.Padding(4)
-        Me.ReturnButton.Name = "ReturnButton"
-        Me.ReturnButton.Size = New System.Drawing.Size(67, 39)
-        Me.ReturnButton.TabIndex = 10
-        Me.ReturnButton.TabStop = False
-        Me.ReturnButton.Text = "戻る"
-        Me.ReturnButton.UseVisualStyleBackColor = True
         '
         'SaveButton
         '
@@ -140,15 +131,6 @@ Partial Class BookDetail
         Me.Label7.TabIndex = 9
         Me.Label7.Text = "読書終了日："
         '
-        'MemoRichTextBox
-        '
-        Me.MemoRichTextBox.Location = New System.Drawing.Point(11, 493)
-        Me.MemoRichTextBox.Margin = New System.Windows.Forms.Padding(4)
-        Me.MemoRichTextBox.Name = "MemoRichTextBox"
-        Me.MemoRichTextBox.Size = New System.Drawing.Size(772, 335)
-        Me.MemoRichTextBox.TabIndex = 7
-        Me.MemoRichTextBox.Text = ""
-        '
         'Label8
         '
         Me.Label8.AutoSize = True
@@ -217,7 +199,6 @@ Partial Class BookDetail
         '
         'BookImagePictureBox
         '
-        Me.BookImagePictureBox.Image = Global.booknote.My.Resources.Resources.noimage
         Me.BookImagePictureBox.Location = New System.Drawing.Point(11, 68)
         Me.BookImagePictureBox.Margin = New System.Windows.Forms.Padding(4)
         Me.BookImagePictureBox.Name = "BookImagePictureBox"
@@ -232,7 +213,7 @@ Partial Class BookDetail
         Me.BuyDateTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.BuyDateTextBox.Name = "BuyDateTextBox"
         Me.BuyDateTextBox.Size = New System.Drawing.Size(182, 41)
-        Me.BuyDateTextBox.TabIndex = 37
+        Me.BuyDateTextBox.TabIndex = 4
         '
         'Label9
         '
@@ -250,7 +231,7 @@ Partial Class BookDetail
         Me.StartDateTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.StartDateTextBox.Name = "StartDateTextBox"
         Me.StartDateTextBox.Size = New System.Drawing.Size(182, 41)
-        Me.StartDateTextBox.TabIndex = 39
+        Me.StartDateTextBox.TabIndex = 5
         '
         'EndDateTextBox
         '
@@ -258,13 +239,55 @@ Partial Class BookDetail
         Me.EndDateTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.EndDateTextBox.Name = "EndDateTextBox"
         Me.EndDateTextBox.Size = New System.Drawing.Size(182, 41)
-        Me.EndDateTextBox.TabIndex = 40
+        Me.EndDateTextBox.TabIndex = 6
+        '
+        'EditButton
+        '
+        Me.EditButton.Enabled = False
+        Me.EditButton.Location = New System.Drawing.Point(635, 10)
+        Me.EditButton.Margin = New System.Windows.Forms.Padding(4)
+        Me.EditButton.Name = "EditButton"
+        Me.EditButton.Size = New System.Drawing.Size(70, 39)
+        Me.EditButton.TabIndex = 43
+        Me.EditButton.TabStop = False
+        Me.EditButton.Text = "編集"
+        Me.EditButton.UseVisualStyleBackColor = True
+        '
+        'RecodeDateLabel
+        '
+        Me.RecodeDateLabel.AutoSize = True
+        Me.RecodeDateLabel.Location = New System.Drawing.Point(13, 16)
+        Me.RecodeDateLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.RecodeDateLabel.Name = "RecodeDateLabel"
+        Me.RecodeDateLabel.Size = New System.Drawing.Size(0, 27)
+        Me.RecodeDateLabel.TabIndex = 44
+        '
+        'MemoRichTextBox
+        '
+        Me.MemoRichTextBox.Location = New System.Drawing.Point(11, 493)
+        Me.MemoRichTextBox.Margin = New System.Windows.Forms.Padding(4)
+        Me.MemoRichTextBox.Name = "MemoRichTextBox"
+        Me.MemoRichTextBox.Size = New System.Drawing.Size(772, 335)
+        Me.MemoRichTextBox.TabIndex = 7
+        Me.MemoRichTextBox.Text = ""
+        '
+        'UpdateDateLabel
+        '
+        Me.UpdateDateLabel.AutoSize = True
+        Me.UpdateDateLabel.Location = New System.Drawing.Point(210, 16)
+        Me.UpdateDateLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.UpdateDateLabel.Name = "UpdateDateLabel"
+        Me.UpdateDateLabel.Size = New System.Drawing.Size(0, 27)
+        Me.UpdateDateLabel.TabIndex = 45
         '
         'BookDetail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 27.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(796, 841)
+        Me.Controls.Add(Me.UpdateDateLabel)
+        Me.Controls.Add(Me.RecodeDateLabel)
+        Me.Controls.Add(Me.EditButton)
         Me.Controls.Add(Me.EndDateTextBox)
         Me.Controls.Add(Me.StartDateTextBox)
         Me.Controls.Add(Me.Label9)
@@ -286,9 +309,10 @@ Partial Class BookDetail
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BookImagePictureBox)
         Me.Controls.Add(Me.SaveButton)
-        Me.Controls.Add(Me.ReturnButton)
         Me.Font = New System.Drawing.Font("游ゴシック", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
+        Me.MaximizeBox = False
         Me.Name = "BookDetail"
         Me.Text = "BookDetail"
         CType(Me.ReviewTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
@@ -297,8 +321,6 @@ Partial Class BookDetail
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ReturnButton As Button
     Friend WithEvents SaveButton As Button
     Friend WithEvents BookImagePictureBox As PictureBox
     Friend WithEvents Label1 As Label
@@ -308,7 +330,6 @@ Partial Class BookDetail
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
-    Friend WithEvents MemoRichTextBox As RichTextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents TitleTextBox As TextBox
     Friend WithEvents AuthorTextBox As TextBox
@@ -320,4 +341,8 @@ Partial Class BookDetail
     Friend WithEvents Label9 As Label
     Friend WithEvents StartDateTextBox As TextBox
     Friend WithEvents EndDateTextBox As TextBox
+    Friend WithEvents EditButton As Button
+    Friend WithEvents RecodeDateLabel As Label
+    Friend WithEvents MemoRichTextBox As RichTextBox
+    Friend WithEvents UpdateDateLabel As Label
 End Class
