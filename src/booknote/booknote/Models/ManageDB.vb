@@ -33,21 +33,22 @@ Public Class ManageDB
             Dim commandDB As New SQLiteCommand()
             commandDB.Connection = connectToDB
 
-            commandDB.CommandText = "CREATE TABLE books (
-	                                id	INTEGER NOT NULL,
-	                                title	TEXT NOT NULL,
-	                                author	TEXT NOT NULL,
-	                                book_image	BLOB,
-	                                genre	TEXT,
-	                                review_value	REAL,
-	                                memo	TEXT,
-	                                buy_date	TEXT NOT NULL,
-	                                start_date	TEXT,
-	                                end_date	TEXT,
-	                                recode_date	TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
-	                                update_date	TEXT,
-	                                PRIMARY KEY(id AUTOINCREMENT)
-                                );"
+            commandDB.CommandText = "
+CREATE TABLE books (
+    id	INTEGER NOT NULL
+  , title	TEXT NOT NULL
+  , author	TEXT NOT NULL
+  , book_image	BLOB
+  , genre	TEXT
+  , review_value	REAL
+  , memo	TEXT
+  , buy_date	TEXT NOT NULL
+  , start_date	TEXT
+  , end_date	TEXT
+  , recode_date	TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
+  , update_date	TEXT
+  , PRIMARY KEY(id AUTOINCREMENT)
+);"
 
             commandDB.ExecuteNonQuery()
         Catch ex As Exception
@@ -94,8 +95,19 @@ Public Class ManageDB
             commandDB.Connection = connectToDB
 
             commandDB.CommandText =
-                $"UPDATE books SET title = @title, author = @author, book_image = @book_image,
-            genre = @genre, review_value = @review_value, memo = @memo, buy_date = @buy_date, start_date = @start_date, end_date = @end_date, update_date = @update_date WHERE id = @id;"
+$"UPDATE books
+SET
+    title = @title
+  , author = @author
+  , book_image = @book_image
+  , genre = @genre
+  , review_value = @review_value
+  , memo = @memo
+  , buy_date = @buy_date
+  , start_date = @start_date
+  , end_date = @end_date
+  , update_date = @update_date WHERE id = @id
+;"
 
             AddSqlParameter(commandDB, "@title", DbType.String, book.Title)
             AddSqlParameter(commandDB, "@author", DbType.String, book.Author)
@@ -234,11 +246,26 @@ Public Class ManageDB
             commandDB.Connection = connectToDB
 
             commandDB.CommandText =
-                $"INSERT INTO books(title, author, book_image, genre, review_value,
-            memo, buy_date, start_date, end_date )
-            VALUES(@title, @author, @book_image, @genre,
-            @review_value, @memo, @buy_date, @start_date,
-            @end_date);"
+$"INSERT INTO books(
+    title
+  , author
+  , book_image
+  , genre
+  , review_value
+  , memo
+  , buy_date
+  , start_date, end_date
+) VALUES(
+    @title
+  , @author
+  , @book_image
+  , @genre
+  ,@review_value
+  , @memo
+  , @buy_date
+  , @start_date
+  , @end_date
+);"
 
             AddSqlParameter(commandDB, "@title", DbType.String, book.Title)
             AddSqlParameter(commandDB, "@author", DbType.String, book.Author)
